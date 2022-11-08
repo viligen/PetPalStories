@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     'PetPalStories.common',
     'PetPalStories.accounts',
     'PetPalStories.stories',
-    'PetPalStories.petitions'
+    'PetPalStories.petitions',
+
+    'bootstrap5',
 
 
 

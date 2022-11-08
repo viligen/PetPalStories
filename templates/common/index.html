@@ -1,16 +1,58 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block main_content %}
 
-    <div class="container-fluid" >
-        <img src="..." class="card-img-center" alt="...">
+    <div class="container w-50 mt-20 mb-20">
+
         <div class="card-body text-center">
-            <h5 class="card-title-center">PetPalStories</h5>
-            <p class="card-text-center">Welcome to PetPalStories where we share the most touching stories of our beloved pets </p>
+            <h1 class="card-title-center display-1 mt-20 p-20">PetPalStories</h1>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide w-60" data-bs-ride="true">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner w-60 text-center">
+                <div class="carousel-item active w-60">
+                    <img src="{% static 'images/riva1.jpg' %}" class="d-block w-100" alt="riva1-image">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/riva1.jpg' %}" class="d-block w-100" alt="riva2-image">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/riva1.jpg' %}" class="d-block w-100" alt="riva3-image">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="card-body text-center mt-20 mb-20">
+            <p class="h5 card-text-center">My name is Riva and I'm the reason this site to exist... </p>
+            <p class="h5 card-text-center">Did I grab your attention? ..bark...bark..>))) </p>
+
+            <p class="h6 card-text-center">If you like to read more about Riva and other pets like her, you are welcome to <a href="">Sign in</a> or <a href="">Sign up</a> and why not share your own favourite pet's <a href="">Stories</a> or support a cause by signing a <a href="">Petition</a></p>
+            <div class="container mt-100 mb-200">
             <a href="#" class="btn btn-secondary">Login</a>
             <a href="#" class="btn btn-secondary">Register</a>
+            </div>
         </div>
+
     </div>
+
+
 
 
 

@@ -1,41 +1,55 @@
 <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">PetPalStories</a>
+    <div class="container w-95">
+        <a class="navbar-brand" href="{% url 'index' %}">PetPalStories</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 float-left">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 float-start">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">About</a>
+                    <a class="navbar-brand active" aria-current="page" href="{% url 'stories' %}">Stories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Petitions</a>
+                    <a class="navbar-brand" href="#">Petitions</a>
                 </li>
             </ul>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 float-right">
-                <li class="nav-item float-right" >
-                    <a class="nav-link active" aria-current="page" href="#">Login</a>
-                </li>
-                <li class="nav-item float-right">
-                    <a class="nav-link" href="#">Register</a>
-                </li>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-100 float-end text-right">
+                {% if not request.user.is_authenticated %}
 
-                <li class="nav-item dropdown float-right">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Profile
-                    </a>
-                    <ul class="dropdown-menu" >
-                        <li><a class="dropdown-item" href="#">My Profile</a></li>
-                        <li><a class="dropdown-item" href="#">My Stories</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                    </ul>
-                </li>
+
+                    <li class="nav-item">
+                        <a class="navbar-brand" aria-current="page" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">Register</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">Add Story</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="#">Notifications</a>
+                    </li>
+
+                    <li class="nav-item dropdown me-30">
+                        <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">My Profile</a></li>
+                            <li><a class="dropdown-item" href="#">My Stories</a></li>
+                            <li><a class="dropdown-item" href="#">My Petitions</a></li>
+                            <li><a class="dropdown-item" href="#">My Messages</a></li>
+                            <li><a class="dropdown-item" href="#">My Favourites</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
 
 
             </ul>
