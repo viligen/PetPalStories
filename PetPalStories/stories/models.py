@@ -1,14 +1,12 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
+from django.utils.text import slugify
 
 from PetPalStories.core.validators import validate_image_size
 
 
-# Create your models here.
-
-
 class Story(models.Model):
-    SPECIES = ['Dog', 'Cat', 'Bird', 'Fish', 'Lizard', 'Snake', 'Other']
+    SPECIES = ['Dog', 'Cat', 'Bird', 'Rabit', 'Fish', 'Lizard', 'Snake', 'Other']
     CHOICES = [(c, c) for c in SPECIES]
 
     MAX_LEN_TITLE = 50
@@ -26,18 +24,18 @@ class Story(models.Model):
         verbose_name='Pet Name'
     )
 
-    text = models.TextField(
+    story_text = models.TextField(
         validators=(
             MinLengthValidator(MIN_LEN_TEXT, message=ERROR_MESSAGE_TEXT_FIELD),
-        )
+        ),
+        verbose_name="Pet's story"
     )
-    picture = models.ImageField(
-        upload_to='pet_photos/',
+    image = models.ImageField(
+        upload_to='stories_images/',
 
         validators=(
             validate_image_size,
         ),
-        default='Pet Image',
         null=True,
         blank=True,
     )
@@ -57,6 +55,12 @@ class Story(models.Model):
     edited_on = models.DateTimeField(
         auto_now=True,
     )
+    slug = models.SlugField(
+        unique=True,
+        null=False,
+        blank=True,
+    )
+
     # owner = models.ForeignKey(
     #     to=User,
     #     on_delete=models.CASCADE,
@@ -65,3 +69,15 @@ class Story(models.Model):
     #     blank=True,
     #
     # )
+
+    def save(self, *args, **kwargs):
+
+        super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = slugify(f'{self.title}-{self.id}')
+
+        return super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'Stories'
+        unique_together = ('title', 'id')

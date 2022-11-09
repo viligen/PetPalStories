@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container w-95">
+<nav class="navbar navbar-expand-lg bg-secondary bg-gradient bg-opacity-10">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">PetPalStories</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 float-start">
                 <li class="nav-item">
-                    <a class="navbar-brand active" aria-current="page" href="{% url 'stories' %}">Stories</a>
+                    <a class="navbar-brand" aria-current="page" href="{% url 'stories' %}">Stories</a>
                 </li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="#">Petitions</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-100 float-end text-right">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5 float-end text-right">
                 {% if not request.user.is_authenticated %}
 
 
@@ -26,18 +26,18 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="navbar-brand" href="#">Add Story</a>
+                        <a class="navbar-brand" href="{% url 'add story' %}">Add Story</a>
                     </li>
                     <li class="nav-item">
                         <a class="navbar-brand" href="#">Notifications</a>
                     </li>
 
-                    <li class="nav-item dropdown me-30">
+                    <li class="nav-item dropdown me-5">
                         <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Profile
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu bg-light">
                             <li><a class="dropdown-item" href="#">My Profile</a></li>
                             <li><a class="dropdown-item" href="#">My Stories</a></li>
                             <li><a class="dropdown-item" href="#">My Petitions</a></li>
