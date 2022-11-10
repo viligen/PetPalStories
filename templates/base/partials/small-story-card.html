@@ -1,12 +1,23 @@
-           <div class="col-sm-3 gap-3 mt-3 mb-3">
-                <div class="card" style="width: 18rem; height: 25rem;">
-                    <img src="/media/{{story.image}}" class="card-img-top" alt="{{story.title}} image" style="width: 18rem; height: 15rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ story.title}}</h5>
-                        <p class="card-text">{{ story.story_text}}</p>
-                        {% if request.user.is_authenticated %}
-                            <a href="{% url 'details story' slug=story.slug %}" class="btn btn-primary opacity-50">Details</a>
-                        {% endif %}
-                    </div>
+{% load static %}
+
+<div class="col-sm-3 gap-3 mt-3 mb-3">
+    <div class="card" style="width: 18rem; height: 25rem;">
+        {% if story.image %}
+            <img src="/media/{{ story.image }}" class="card-img-top" alt="pet image"
+                 style="width: 18rem; height: 14rem;">
+        {% else %}
+            <img src="{% static 'images/default_animal_image.png' %}" class="card-img-top" alt="pet image"
+                 style="width: 18rem; height: 14rem;">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">Title: {{ story.title|truncatechars:20 }}</h5>
+            <p class="card-text">Pet's Name: {{ story.pet_name }}</p>
+            <p class="card-text">{{ story.story_text|truncatechars:25 }}</p>
+            {% if request.user.is_authenticated %}
+                <div class="container mb-1 text-right">
+                    <a href="{% url 'details story' slug=story.slug %}" class="btn btn-primary opacity-50">Details</a>
                 </div>
-            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

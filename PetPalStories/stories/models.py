@@ -6,7 +6,7 @@ from PetPalStories.core.validators import validate_image_size
 
 
 class Story(models.Model):
-    SPECIES = ['Dog', 'Cat', 'Bird', 'Rabit', 'Fish', 'Lizard', 'Snake', 'Other']
+    SPECIES = ['Dog', 'Cat', 'Bird', 'Rabbit', 'Fish', 'Lizard', 'Snake', 'Other']
     CHOICES = [(c, c) for c in SPECIES]
 
     MAX_LEN_TITLE = 50

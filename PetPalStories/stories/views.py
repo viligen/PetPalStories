@@ -16,6 +16,6 @@ class StoriesListView(generic.ListView):
 
 class AddStoryView(auth_mixins.LoginRequiredMixin, generic.CreateView):
     model = Story
-    fields = '__all__'
+    fields = ('title', 'pet_name', 'story_text', 'pet_species', 'image')
     template_name = 'stories/story-add.html'
     success_url = reverse_lazy('stories')
