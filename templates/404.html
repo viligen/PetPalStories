@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block main_content %}
+
+    <div class="container-fluid">
+        <img src="{% static 'images/default_animal_image.png' %}" alt="404 not found gif">
+        <div class="not-found">
+        <h1>
+            Uh oh,<br> something went wrong.
+        </h1>
+
+        <h3>Error 404 - Page not found.</h3>
+
+        <a href="{% url 'index' %}" class="btn btn-primary opacity-50">Return to PetPalStories</a>
+    </div>
+    </div>
+
+
+
+
+{% endblock %}

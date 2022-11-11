@@ -1,8 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils.text import slugify
 
 from PetPalStories.core.validators import validate_image_size
+
+UserModel = get_user_model()
 
 
 class Story(models.Model):
@@ -61,14 +64,14 @@ class Story(models.Model):
         blank=True,
     )
 
-    # owner = models.ForeignKey(
-    #     to=User,
-    #     on_delete=models.CASCADE,
-    #     default=None,
-    #     null=True,
-    #     blank=True,
-    #
-    # )
+    owner = models.ForeignKey(
+        to=UserModel,
+        on_delete=models.CASCADE,
+
+        null=False,
+        blank=True,
+
+    )
 
     def save(self, *args, **kwargs):
 

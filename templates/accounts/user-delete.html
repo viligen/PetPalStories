@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% load bootstrap5 %}
 
-</body>
-</html>
+{% block main_content %}
+
+    <div class="container w-60 text-center">
+        <h2>Profile Deactivation Form</h2>
+
+        <div class="container w-50 text-start mt-5 mb-5">
+            <form class="form" method="post" action="{% url 'delete user' pk=request.user.pk %}">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="hidden" name="next" value="{% url 'index' %}">
+                {% buttons %}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-danger">Confirm Deactivation</button>
+                    </div>
+                {% endbuttons %}
+
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock %}

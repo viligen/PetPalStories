@@ -43,10 +43,10 @@
             <p class="display-6 fs-6 card-text-center">My name is Riva and I'm the reason this site to exist... </p>
             <p class="display-6 fs-6 card-text-center">Did I grab your attention? ..bark...bark..>))) </p>
 
-            <p class="display-6 fs-6 card-text-center">If you like to read more about Riva and other pets like her, you are welcome to <a href="">Sign in</a> or <a href="">Sign up</a> and why not share your own favourite pet's <a href="">Stories</a> or support a cause by signing a <a href="">Petition</a></p>
+            <p class="display-6 fs-6 card-text-center">If you like to read more about Riva and other pets like her, you are welcome to <a href="{% url 'login' %}">Sign in</a> or <a href="{% url 'register' %}">Sign up</a> and why not share your own favourite pet's <a href="{% url 'stories' %}">Stories</a> or support a cause by signing a <a href="">Petition</a></p>
             <div class="container mt-3 mb-5">
-            <a href="#" class="btn btn-primary opacity-50">Sign In</a>
-            <a href="#" class="btn btn-primary opacity-50">Sign Up</a>
+            <a href="{% url 'login' %}" class="btn btn-primary opacity-50">Sign In</a>
+            <a href="{% url 'register' %}" class="btn btn-primary opacity-50">Sign Up</a>
             </div>
         </div>
 

@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% block main_content %}
+    <div class = "container w-50 mt-5">
+    <div class="card text-center">
+        <div class="card-header h3">
+            Your Account Data
+        </div>
+        <div class="card-body">
+            {% if profile.first_name or profile.last_name %}
 
-</body>
-</html>
+            <h5 class="card-title">Name: {{ profile.first_name|default_if_none:'' }} {{ profile.last_name|default_if_none:'' }}</h5>
+            {% endif %}
+            <h5 class="card-title">Username: {{ profile.username}}</h5>
+            <h5 class="card-text">Email: {{ profile.email}}</h5>
+            <h6 class="card-text">Gender: {{ profile.gender}}</h6>
+            <p class="card-text mt-2">Published Stories: {{ 0 }}</p>
+            <p class="card-text">Started Petitions: {{ 0 }}</p>
+            <p class="card-text">Favourite Stories: {{ 0 }}</p>
+            <a href="{% url 'edit user' pk=profile.pk %}" class="btn btn-outline-warning">Edit Data</a>
+            <a href="{% url 'delete user' pk=profile.pk %}" class="btn btn-outline-danger">Deactivate</a>
+        </div>
+        <div class="card-footer text-muted">
+            Last login: {{ profile.last_login }}
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}
