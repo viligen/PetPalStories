@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block main_content %}
+    <div class="container w-70">
+        <div class="container-fluid text-center">
+            <h4 class="card-title-center display-4 mt-5 mb-5 p-5">My Favourite Stories</h4>
+
+        </div>
+
+        <div class="row mt-5 mb-5">
+
+
+            {% for story in  stories_filtered %}
+
+                {% include 'base/partials/small-story-card.html' with story=story %}
+            {% empty %}
+                <h4 class="d-block text-center"> No Favourite Stories</h4>
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+{% endblock %}

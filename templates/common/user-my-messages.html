@@ -63,7 +63,9 @@
 
                 <div class="card w-55 mb-1">
                     <div class="card-body">
-                        <h6 class="card-title">Subject: {{ message.subject }} <span class="ms-5">To: {{ message.receiver }}</span><span class="text-muted ms-5">Sent on: {{ message.sent_on }}</span><span class="text-muted ms-5">Read by Recipient: {% if  message.is_read%}Yes{% else %}No{% endif %}</span>
+                        <h6 class="card-title">Subject: {{ message.subject }} <span class="ms-5">To: {{ message.receiver }}
+                        </span><span class="text-muted ms-5">Sent on: {{ message.sent_on }}</span>
+                            <span class="text-muted ms-5">Seen on: {{message.seen_on|default_if_none:'Not seen yet'}}</span>
                         </h6>
                         <p class="card-text">Text: {{ message.text }}</p>
                         <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-danger opacity-50">Delete</a>

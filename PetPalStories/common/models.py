@@ -16,6 +16,11 @@ class MessageStory(models.Model):
         null=False,
         blank=True
     )
+    seen_on = models.DateTimeField(
+        default=None,
+        null=True,
+        blank=True
+    )
 
     is_read = models.BooleanField(
         default=False,
@@ -70,7 +75,7 @@ class FavouriteStory(models.Model):
         blank=True,
 
     )
-    owner = models.ForeignKey(
+    user = models.ForeignKey(
         to=UserModel,
         on_delete=models.CASCADE,
         null=True,

@@ -5,12 +5,15 @@
 
 
     <div class="container w-60 text-center mt-5">
-        <h2>Message the Owner of This Story</h2>
+        <h2>Message the Author of This Story</h2>
 
     <div class="container w-50 text-start mt-5 mb-5">
+    <div class="container card mb-1">
         <h5>Subject: {{ story.title }}</h5>
-        <h6>To: {{ receiver }}</h6>
-        <h6>From: {{ sender }}</h6>
+        <p class="d-inline h6">To: {{ receiver }}<span class="d-inline h6 ms-5">From: {{ sender }}</span></p>
+
+
+    </div>
         <form class="form " method="post" action="{% url 'message story' slug=story.slug %}" enctype="multipart/form-data">
 
             {% csrf_token %}

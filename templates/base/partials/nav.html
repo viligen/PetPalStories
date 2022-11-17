@@ -21,34 +21,34 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link fs-4" aria-current="page" href="{% url 'login' %}">SignIn</a>
+                        <a class="nav-link fs-4" aria-current="page" href="{% url 'login' %}">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-4" href="{% url 'register' %}">SignUp</a>
+                        <a class="nav-link fs-4" href="{% url 'register' %}">Sign Up</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link fs-4" href="{% url 'add story' %}">Add Story</a>
+                        <a class="nav-link fs-6 pt-3" href="{% url 'details user' pk=request.user.pk %}">You are signed in as {{ request.user.username }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-4" href="#">Notifications</a>
+                        <a class="nav-link fs-4" href="{% url 'messages user' pk=request.user.pk %}">Messages</a>
                     </li>
 
-                    <li class="nav-item dropdown me-5">
+                    <li class="nav-item dropdown me-4">
                         <a class="nav-link fs-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Profile
                         </a>
-                        <ul class="dropdown-menu bg-light">
-                            <li><a class="dropdown-item" href="{% url 'details user' pk=request.user.pk %}">Account</a></li>
-                            <li><a class="dropdown-item" href="#">Stories</a></li>
-                            <li><a class="dropdown-item" href="#">Petitions</a></li>
-                            <li><a class="dropdown-item" href="{% url 'messages user' pk=request.user.pk %}">Messages</a></li>
-                            <li><a class="dropdown-item" href="#">Favourites</a></li>
+                        <ul class="dropdown-menu bg-light mt-2 border-0">
+                            <li><a class="dropdown-item fs-5" href="{% url 'details user' pk=request.user.pk %}">My Account</a></li>
+                            <li><a class="dropdown-item fs-5" href="{% url 'own published stories user' pk=request.user.pk %}">My Stories</a></li>
+                            <li><a class="dropdown-item fs-5" href="#">My Petitions</a></li>
+                            <li><a class="dropdown-item fs-5" href="{% url 'messages user' pk=request.user.pk %}">My Messages</a></li>
+                            <li><a class="dropdown-item fs-5" href="{% url 'favourite stories user' pk=request.user.pk %}">My Favourites</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item fw-bold" href="{% url 'logout' %}">Sign Out</a></li>
+                            <li><a class="dropdown-item fs-5 fw-bold" href="{% url 'logout' %}">Sign Out</a></li>
                         </ul>
                     </li>
                 {% endif %}

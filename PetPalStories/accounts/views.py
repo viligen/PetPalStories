@@ -1,10 +1,12 @@
-from django.contrib.auth import views as auth_views, get_user_model
+from django.contrib.auth import views as auth_views, get_user_model, authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
 from PetPalStories.accounts.forms import UserCreateForm
+from PetPalStories.common.models import FavouriteStory
+from PetPalStories.stories.models import Story
 
 UserModel = get_user_model()
 
@@ -21,6 +23,15 @@ class SignUpView(generic.CreateView):
 
     success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        form.save()
+        new_user = authenticate(username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password1'],
+                                email=form.cleaned_data['email']
+                                )
+        login(self.request, new_user)
+        return redirect(self.success_url)
+
 
 class SignOutView(auth_views.LogoutView):
     next_page = reverse_lazy('index')
@@ -35,6 +46,8 @@ class ProfileDetailsView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_owner'] = self.request.user == self.object
+        context['own_stories_count'] = Story.objects.filter(owner_id=self.request.user.pk).count()
+        context['favourite_stories_count'] = FavouriteStory.objects.filter(user_id=self.request.user.pk).count()
         return context
 
 

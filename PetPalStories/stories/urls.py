@@ -1,6 +1,6 @@
 from django.urls import path
 
-from PetPalStories.common.views import MessageStoryCreateView
+
 from PetPalStories.stories.views import StoriesListView, AddStoryView, StoryDetailsView
 
 urlpatterns = [
@@ -10,5 +10,5 @@ urlpatterns = [
     path('details/<slug:slug>/', StoryDetailsView.as_view(), name='details story'),
     path('edit/<slug:slug>/', AddStoryView.as_view(), name='edit story'),
     path('delete/<slug:slug>/', AddStoryView.as_view(), name='delete story'),
-    path('details/<slug:slug>/message/', MessageStoryCreateView.as_view(), name='message story'),
+
 ]

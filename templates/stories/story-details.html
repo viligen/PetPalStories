@@ -30,6 +30,11 @@
                     <a href="{% url 'delete story' slug=story.slug %}" class="btn btn-outline-danger">Delete Story</a>
                 {% else %}
                     <a href="{% url 'message story' slug=story.slug %}" class="btn btn-outline-primary">Send Message</a>
+                    {% if is_favourite is None %}
+                        <a href="{% url 'favourite story' slug=story.slug %}" class="btn btn-outline-primary">Add to Favourite</a>
+                    {% else %}
+                        <a href="{% url 'favourite story' slug=story.slug %}" class="btn btn-outline-danger">Remove from Favourite</a>
+                    {% endif %}
                 {% endif %}
                 </div>
 

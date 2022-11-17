@@ -3,12 +3,12 @@
 
 {% block main_content %}
 
-    <div class="container mb-5 text-center w-50">
+    <div class="container mb-5 text-center w-50 rounded">
 
         <div class="card-body text-center">
             <h1 class="card-title-center display-4 p-3">PetPal Stories</h1>
         </div>
-        <div id="carouselExampleIndicators" class="carousel slide text-center" data-bs-ride="true">
+        <div id="carouselExampleIndicators" class="carousel slide text-center rounded shadow" data-bs-ride="true">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                         aria-current="true" aria-label="Slide 1"></button>
@@ -18,14 +18,14 @@
                         aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner text-center">
-                <div class="carousel-item active w-70">
-                    <img src="{% static 'images/Riva1_resized.jpg' %}" class="d-block w-100" alt="riva1-image">
+                <div class="carousel-item active w-60">
+                    <img src="{% static 'images/Riva1_resized.jpg' %}" class="d-block w-100 rounded-circle shadow" alt="riva1-image">
                 </div>
                 <div class="carousel-item">
-                    <img src="{% static 'images/Riva2_resized.jpg' %}" class="d-block w-100" alt="riva2-image">
+                    <img src="{% static 'images/Riva2_resized.jpg' %}" class="d-block w-100 rounded-circle shadow" alt="riva2-image">
                 </div>
                 <div class="carousel-item">
-                    <img src="{% static 'images/Riva3_resized.jpg' %}" class="d-block w-100" alt="riva3-image">
+                    <img src="{% static 'images/Riva3_resized.jpg' %}" class="d-block w-100 rounded-circle shadow" alt="riva3-image">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -39,12 +39,12 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <div class="card-body text-center mt-3 mb-5">
+        <div class="container rounded shadow text-justify mt-1 mb-5 pt-3">
             <p class="display-6 fs-6 card-text-center">My name is Riva and I'm the reason this site to exist... </p>
             <p class="display-6 fs-6 card-text-center">Did I grab your attention? ..bark...bark..>))) </p>
 
             <p class="display-6 fs-6 card-text-center">If you like to read more about Riva and other pets like her, you are welcome to <a href="{% url 'login' %}">Sign in</a> or <a href="{% url 'register' %}">Sign up</a> and why not share your own favourite pet's <a href="{% url 'stories' %}">Stories</a> or support a cause by signing a <a href="">Petition</a></p>
-            <div class="container mt-3 mb-5">
+            <div class="container mt-3 mb-5 pb-3">
             <a href="{% url 'login' %}" class="btn btn-primary opacity-50">Sign In</a>
             <a href="{% url 'register' %}" class="btn btn-primary opacity-50">Sign Up</a>
             </div>
