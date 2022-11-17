@@ -84,3 +84,4 @@ class Story(models.Model):
     class Meta:
         verbose_name_plural = 'Stories'
         unique_together = ('title', 'id')
+        ordering = ('-published_on', )

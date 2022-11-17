@@ -6,7 +6,7 @@ from PetPalStories.stories.models import Story
 UserModel = get_user_model()
 
 
-class Message(models.Model):
+class MessageStory(models.Model):
     text = models.TextField(
 
     )
@@ -29,16 +29,40 @@ class Message(models.Model):
         blank=True,
 
     )
-    owner = models.ForeignKey(
+    sender = models.ForeignKey(
         to=UserModel,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        related_name='sender'
+
 
     )
+    receiver = models.ForeignKey(
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='receiver'
+    )
+
+    def save(self, *args, **kwargs):
+
+        super().save(*args, **kwargs)
+        if not self.receiver:
+            self.receiver = Story.objects.filter(pk=self.story_id).get().owner
+
+        return super().save(*args, **kwargs)
+    @property
+    def subject(self):
+        story = Story.objects.filter(pk=self.story_id).get()
+        return story.title
+
+    class Meta:
+        ordering = ('-sent_on',)
 
 
-class Favourite(models.Model):
+class FavouriteStory(models.Model):
     story = models.ForeignKey(
         to=Story,
         on_delete=models.CASCADE,

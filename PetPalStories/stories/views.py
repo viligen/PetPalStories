@@ -10,7 +10,7 @@ from PetPalStories.stories.models import Story
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
-# Create your views here.
+
 class StoriesListView(generic.ListView):
     model = Story
     template_name = 'stories/stories-dashboard.html'
@@ -27,3 +27,9 @@ class AddStoryView(auth_mixins.LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.owner_id = self.request.user.pk
         return super().form_valid(form)
+
+
+class StoryDetailsView(generic.DetailView):
+    model = Story
+    template_name = 'stories/story-details.html'
+    context_object_name = 'story'

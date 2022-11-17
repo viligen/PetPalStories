@@ -1,12 +1,43 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% load bootstrap5 %}
 
 {% block main_content %}
+    <div class="container text-center mt-5 mb-5">
+        <h2 class="">{{ story.title }}'s Details</h2>
+    </div>
+    <div class="card container text-center mt-5">
 
-    <div class="card-body text-center">
-        <h2>{{ story.title }}'s Details</h2>
+        <div class="card-body container row text-center">
+            {% if story.image %}
+                <img src="/media/{{ story.image }}" class="col-5 rounded-circle shadow" alt="{{ story.title }}'s image">
+            {% else %}
+                <img src="{% static 'images/default_animal_image.png' %}" class="col-5 shadow rounded-circle"
+                     alt="{{ story.title }}'s image">
+            {% endif %}
+
+            <div class="card-body col-6">
+                <h5 class="card-title">Title: {{ story.title }}</h5>
+                <p class="card-text fw-6">Pet Name: {{ story.pet_name }}<span> Type: {{ story.pet_species }}</span></p>
+                <p class="card-text">Story: {{ story.story_text }}</p>
+                <hr>
+                <p class="card-text"><small class="text-muted">Published on: {{ story.published_on }}</small></p>
+                <p class="card-text"><small class="text-muted">Last updated: {{ story.edited_on }}</small></p>
+                <hr>
+                <div class="mt-5 mb-2">
+                {% if story.owner_id == request.user.id %}
+                    <a href="{% url 'edit story' slug=story.slug %}" class="btn btn-outline-warning">Edit Story</a>
+                    <a href="{% url 'delete story' slug=story.slug %}" class="btn btn-outline-danger">Delete Story</a>
+                {% else %}
+                    <a href="{% url 'message story' slug=story.slug %}" class="btn btn-outline-primary">Send Message</a>
+                {% endif %}
+                </div>
 
 
+            </div>
+
+
+        </div>
 
 
     </div>

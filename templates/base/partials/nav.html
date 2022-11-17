@@ -43,7 +43,7 @@
                             <li><a class="dropdown-item" href="{% url 'details user' pk=request.user.pk %}">Account</a></li>
                             <li><a class="dropdown-item" href="#">Stories</a></li>
                             <li><a class="dropdown-item" href="#">Petitions</a></li>
-                            <li><a class="dropdown-item" href="#">Messages</a></li>
+                            <li><a class="dropdown-item" href="{% url 'messages user' pk=request.user.pk %}">Messages</a></li>
                             <li><a class="dropdown-item" href="#">Favourites</a></li>
                             <li>
                                 <hr class="dropdown-divider">
