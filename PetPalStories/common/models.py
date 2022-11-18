@@ -65,6 +65,7 @@ class MessageStory(models.Model):
 
     class Meta:
         ordering = ('-sent_on',)
+        verbose_name_plural = 'Message Stories'
 
 
 class FavouriteStory(models.Model):
@@ -82,3 +83,6 @@ class FavouriteStory(models.Model):
         blank=True,
 
     )
+
+    class Meta:
+        verbose_name_plural = 'Favourite Stories'

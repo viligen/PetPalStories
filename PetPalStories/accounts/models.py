@@ -49,5 +49,3 @@ class AppUser(auth_models.AbstractUser):
         null=False,
         blank=True,
     )
-
-    # USERNAME_FIELD = 'email'

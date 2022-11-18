@@ -36,7 +36,7 @@ class MessageStoryCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
         return context
 
     def get_success_url(self):
-        story_slug = Story.objects.filter(slug=self.kwargs['slug']).get().slug
+        story_slug = self.kwargs['slug']
         return reverse_lazy('details story', kwargs={'slug': story_slug})
 
     def form_valid(self, form):
@@ -94,7 +94,7 @@ def favourite_story(request, slug):
 
 class MyFavouriteStories(auth_mixins.LoginRequiredMixin, generic.ListView):
     model = FavouriteStory
-    template_name = 'common/user-my-favourites_stories.html'
+    template_name = 'common/user-my-favourite-stories.html'
     context_object_name = 'stories'
 
     def get_context_data(self, **kwargs):

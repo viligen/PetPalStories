@@ -81,6 +81,9 @@ class Story(models.Model):
 
         return super().save(*args, **kwargs)
 
+    def __str__(self):
+        return f'{self.slug}'
+
     class Meta:
         verbose_name_plural = 'Stories'
         unique_together = ('title', 'id')

@@ -29,11 +29,11 @@
                     <a href="{% url 'edit story' slug=story.slug %}" class="btn btn-outline-warning">Edit Story</a>
                     <a href="{% url 'delete story' slug=story.slug %}" class="btn btn-outline-danger">Delete Story</a>
                 {% else %}
-                    <a href="{% url 'message story' slug=story.slug %}" class="btn btn-outline-primary">Send Message</a>
+                    <a href="{% url 'message story' slug=story.slug %}" class="btn btn-outline-info">Send Message</a>
                     {% if is_favourite is None %}
-                        <a href="{% url 'favourite story' slug=story.slug %}" class="btn btn-outline-primary">Add to Favourite</a>
+                        <a href="{% url 'favourite story' slug=story.slug %}" class="btn btn-outline-info">Add to Favourites<img class="ms-2" src="{% static '/images/star-6-16.png'%}" alt="add to favourites"></a>
                     {% else %}
-                        <a href="{% url 'favourite story' slug=story.slug %}" class="btn btn-outline-danger">Remove from Favourite</a>
+                        <a href="{% url 'favourite story' slug=story.slug %}" class="btn btn-outline-danger">Remove from Favourites<img class="ms-2" src="{% static '/images/outline-star-16.png'%}" alt="remove from favourites"></a>
                     {% endif %}
                 {% endif %}
                 </div>
