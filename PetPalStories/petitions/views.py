@@ -19,7 +19,7 @@ class PetitionsListView(generic.ListView):
     def get_queryset(self):
         query = self.request.GET.get('query', '').strip()
 
-        object_list = self.model.objects.all()
+        object_list = self.model.objects.filter(is_active=True)
         if query:
             object_list = object_list\
                 .filter(Q(location__icontains=query) | Q(title__icontains=query))

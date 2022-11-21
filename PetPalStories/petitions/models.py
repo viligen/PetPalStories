@@ -65,6 +65,12 @@ class Petition(models.Model):
         blank=True,
     )
 
+    is_active = models.BooleanField(
+        default=True,
+        null=False,
+        blank=True,
+    )
+
     owner = models.ForeignKey(
         to=UserModel,
         on_delete=models.SET_NULL,

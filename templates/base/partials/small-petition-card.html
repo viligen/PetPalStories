@@ -12,16 +12,16 @@
         {% endif %}
         <div class="col-8 card-body">
             <h5 class="card-title">Title: {{ petition.title }}</h5>
-            <p class="card-text">Location: {{ petition.location }}</p>
-            <p class="card-text">Goal: {{ petition.goal }}</p>
+            <p class="card-text mb-1">Target Location: {{ petition.location }}</p>
+            <p class="card-text mb-1">Goal: {{ petition.goal }} unique signatures</p>
             <p class="card-text">{{ petition.description|truncatechars:50 }}</p>
             {% if request.user.is_authenticated %}
-                <div class="container mb-1 text-right">
+                <p class="card-text mb-1 text-right">
                     <a href="{% url 'details petition' slug=petition.slug %}" class="btn btn-outline-info">Details</a>
                     {% if petition.owner == request.user %}
                         <a href="{% url 'stop petition' slug=petition.slug %}" class="btn btn-outline-danger">Stop</a>
                     {% endif %}
-                </div>
+                </p>
             {% endif %}
 
         </div>
