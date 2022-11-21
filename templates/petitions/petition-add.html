@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load bootstrap5 %}
+
+{% block main_content %}
+
+    <div class="container w-60 text-center">
+        <h2>Start Your Petition</h2>
+
+    <div class="container w-50 text-start mt-5 mb-5">
+        <form class="form " method="post" action="{% url 'add petition' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <div class="text-center">
+                <button type="submit" class="btn btn-outline-info">Start a Petition</button>
+                </div>
+            {% endbuttons %}
+
+        </form>
+    </div>
+
+    </div>
+
+
+{% endblock %}
