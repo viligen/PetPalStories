@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'PetPalStories.petitions',
 
     'bootstrap5',
+    'django_bootstrap5',
 
 
 

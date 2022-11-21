@@ -1,4 +1,5 @@
 {% load static %}
+{% load filter_is_favourite %}
 
 <div class="col-sm-3 gap-1 mt-3 mb-3">
     <div class="card me-0 shadow" style="width: 16rem; height: 28rem;">
@@ -17,6 +18,9 @@
             {% if request.user.is_authenticated %}
                 <div class="container mb-1 text-right">
                     <a href="{% url 'details story' slug=story.slug %}" class="btn btn-outline-info">Details</a>
+                    {% if story|is_favourite:request.user %}
+                        <img class="float-end mt-3 ms-0" src="{% static '/images/star-6-16.png'%}" alt="added to favourites">
+                    {% endif %}
                 </div>
             {% endif %}
 

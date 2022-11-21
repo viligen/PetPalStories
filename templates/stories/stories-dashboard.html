@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
+
 {% block main_content %}
     <div class="container-fluid text-center">
         <h1 class="card-title-center display-1 mt-5 mb-5 p-5">Pets Stories</h1>
@@ -15,7 +16,7 @@
     <div class = "container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
           <form class="d-flex" role="search" method="GET" action="{% url 'stories' %}">
             <input class="form-control me-2" type="search" placeholder="Search by pet name or pet type..." aria-label="Search" name="query" value="{{ request.GET.query }}">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-info" type="submit">Search</button>
           </form>
     </div>
 

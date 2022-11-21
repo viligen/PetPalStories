@@ -1,3 +1,5 @@
+from collections import deque
+
 from django.contrib.auth import mixins as auth_mixins
 from django.db.models import Q
 
@@ -46,6 +48,11 @@ class StoryDetailsView(auth_mixins.LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.session.get('last_seen', None) is None:
+            self.request.session['last_seen'] = []
+
+        self.request.session['last_seen'] = [self.object.pk] + self.request.session['last_seen']
+
         context['is_favourite'] = FavouriteStory.objects.filter(user=self.request.user, story=self.object) or None
 
         return context
