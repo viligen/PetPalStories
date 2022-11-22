@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% load bootstrap5 %}
+
+{% block main_content %}
+
+
+    <div class="container w-60 text-center mt-5">
+        <h2>Support This Petition by Signing It</h2>
+
+    <div class=" card container w-50 text-start mt-5 mb-5">
+    <div class="container mb-3 ">
+        <h5>Title: {{ petition.title }}</h5>
+        <p class="h6">Description: {{ petition.description }}</p>
+
+
+    </div>
+        <form class="form mt-5" method="post" action="{% url 'sign petition' slug=petition.slug %}" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <div class="text-center mt-3">
+                <button type="submit" class="btn btn-outline-info">Sign Petition</button>
+                </div>
+            {% endbuttons %}
+
+        </form>
+    </div>
+
+    </div>
+
+
+{% endblock %}

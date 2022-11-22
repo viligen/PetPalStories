@@ -19,9 +19,9 @@
                     <h5 class="card-title">Username: {{ profile.username }}</h5>
                     <h5 class="card-text">Email: {{ profile.email }}</h5>
                     <h6 class="card-text">Gender: {{ profile.gender }}</h6>
-                    <p class="card-text mt-2">Published Stories: {{ own_stories_count }}</p>
-                    <p class="card-text">Started Petitions: {{ 0 }}</p>
-                    <p class="card-text">Favourite Stories: {{ favourite_stories_count }}</p>
+                    <p class="card-text mt-2"><a class="text-muted" href="{% url 'own published stories user' pk=request.user.pk %}">Published Stories: {{ own_stories_count }}</a></p>
+                    <p class="card-text"><a class="text-muted" href="{% url 'own petitions user' pk=request.user.pk %}">Active Own Petitions: {{ own_petitions_count }}</a></p>
+                    <p class="card-text"><a class="text-muted" href="{% url 'favourite stories user' pk=request.user.pk %}">Favourite Stories: {{ favourite_stories_count }}</a></p>
                     <a href="{% url 'edit user' pk=profile.pk %}" class="btn btn-outline-warning">Edit Data</a>
                     <a href="{% url 'delete user' pk=profile.pk %}" class="btn btn-outline-danger">Deactivate</a>
                 </div>

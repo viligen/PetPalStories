@@ -1,9 +1,13 @@
+import datetime
+from django.utils.timezone import utc
+
 from django.db.models import Q
 from django.shortcuts import render
 from django.contrib.auth import mixins as auth_mixins
 from django.urls import reverse_lazy
 from django.views import generic
 
+from PetPalStories.common.models import SignedPetition
 from PetPalStories.petitions.forms import PetitionCreateForm, PetitionEditForm, PetitionStopForm
 from PetPalStories.petitions.models import Petition
 
@@ -54,11 +58,18 @@ class PetitionDetailsView(auth_mixins.LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # TODO: when sign feature
-        context['is_signed'] = False
-        context['last_signed_on'] = 0
-        context['last_signed_from'] = 'someone'
-        total_signatures = 0
+        singed_petition_obj_user = SignedPetition.objects.filter(petition=self.object, user=self.request.user).count()
+        context['is_signed'] = singed_petition_obj_user > 0
+
+        singed_petition_objs = SignedPetition.objects.filter(petition=self.object)
+        if singed_petition_objs:
+            # context['now'] = datetime.datetime.now()
+            context['last_signed_on'] = singed_petition_objs.first().signed_on
+            context['last_signed_from'] = singed_petition_objs.first().user.username
+        else:
+            context['last_signed_on'] = 'N/A'
+            context['last_signed_from'] = 'N/A'
+        total_signatures = singed_petition_objs.count()
         context['still_to_go'] = self.object.goal - total_signatures
         return context
 

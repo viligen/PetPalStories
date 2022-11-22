@@ -24,9 +24,9 @@
                 <hr>
 
                 <p class="card-text"><small class="text-muted">Published on: {{ petition.published_on }}</small></p>
-                <p class="card-text"><small class="text-muted">Last signed on: {{ last_signed_on }}</small></p>
+                <p class="card-text"><small class="text-muted">Last signed on: {{ last_signed_on}}</small></p>
                 <p class="card-text"><small class="text-muted">Last signed by: {{ last_signed_from }}</small></p>
-                <p class="card-text"><small class="text-muted">Still to go: {{ still_to_go }} signatures</small></p>
+                <p class="card-text"><small class="text-muted">{{ still_to_go }} signatures to go </small></p>
                 <hr>
                 <div class="mt-5 mb-2">
                 {% if petition.owner_id == request.user.id %}
@@ -35,7 +35,7 @@
 
                 {% endif %}
                 {% if not is_signed %}
-                    <a href="#" class="btn btn-outline-info">Sign Petition</a>
+                    <a href="{% url 'sign petition' slug=petition.slug %}" class="btn btn-outline-info">Sign Petition</a>
                 {% endif %}
                 </div>
 

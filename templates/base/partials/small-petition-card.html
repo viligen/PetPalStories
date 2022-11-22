@@ -19,10 +19,10 @@
             <p class="card-text mb-1">Target Location: {{ petition.location }}</p>
             <p class="card-text mb-1">Goal: {{ petition.goal }} unique signatures</p>
             <p class="card-text">Description: {{ petition.description|truncatechars:40|capfirst }}</p>
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and petition.is_active %}
                 <p class="card-text mb-2 text-center">
                     <a href="{% url 'details petition' slug=petition.slug %}" class="btn btn-outline-info">Details</a>
-                    {% if petition.owner == request.user %}
+                    {% if petition.owner == request.user and petition.is_active %}
                         <a href="{% url 'stop petition' slug=petition.slug %}" class="btn btn-outline-danger">Stop</a>
                     {% endif %}
                 </p>

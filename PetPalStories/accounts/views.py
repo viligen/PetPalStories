@@ -6,6 +6,7 @@ from django.views import generic
 
 from PetPalStories.accounts.forms import UserCreateForm
 from PetPalStories.common.models import FavouriteStory
+from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
 
 UserModel = get_user_model()
@@ -48,6 +49,7 @@ class ProfileDetailsView(LoginRequiredMixin, generic.DetailView):
         context['is_owner'] = self.request.user == self.object
         context['own_stories_count'] = Story.objects.filter(owner_id=self.request.user.pk).count()
         context['favourite_stories_count'] = FavouriteStory.objects.filter(user_id=self.request.user.pk).count()
+        context['own_petitions_count'] = Petition.objects.filter(owner_id=self.request.user.pk, is_active=True).count()
         return context
 
 

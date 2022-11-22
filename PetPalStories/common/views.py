@@ -1,13 +1,15 @@
 import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib.auth import mixins as auth_mixins, get_user_model
 from django.urls import reverse_lazy
 from django.views import generic
 
-from PetPalStories.common.forms import MessageStoryForm
-from PetPalStories.common.models import MessageStory, FavouriteStory
+from PetPalStories.common.forms import MessageStoryForm, SignedPetitionForm
+from PetPalStories.common.models import MessageStory, FavouriteStory, SignedPetition
+from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
 
 UserModel = get_user_model()
@@ -116,3 +118,59 @@ class MyPublishedStories(auth_mixins.LoginRequiredMixin, generic.ListView):
 
         context['stories_filtered'] = Story.objects.filter(owner_id=self.request.user.pk)
         return context
+
+
+class MyOwnPetitions(auth_mixins.LoginRequiredMixin, generic.ListView):
+    model = Petition
+    template_name = 'common/user-my-own-petitions.html'
+    context_object_name = 'petitions'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['my_petitions'] = Petition.objects.filter(owner_id=self.request.user.pk, is_active=True)
+        context['my_petitions_stopped'] = Petition.objects.filter(owner_id=self.request.user.pk, is_active=False)
+        return context
+
+
+# def sign_petition(request, slug):
+#     petition = Petition.objects.filter(slug=slug).get()
+#
+#     signed_petition = SignedPetition(user=request.user, petition=petition)
+#     signed_petition.save()
+#     return redirect('details petition', slug=slug)
+
+
+class SignPetitionCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView):
+    model = SignedPetition
+    form_class = SignedPetitionForm
+    template_name = 'common/sign-petition.html'
+    context_object_name = 'singed_petition'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        petition = Petition.objects.filter(slug=self.kwargs['slug']).get()
+
+        context['petition'] = petition
+        return context
+
+    def get_success_url(self):
+
+        return reverse_lazy('details petition', kwargs={'slug': self.kwargs['slug']})
+
+    def form_valid(self, form):
+        form.instance.user_id = self.request.user.pk
+
+        form.instance.petition_id = Petition.objects.filter(slug=self.kwargs['slug']).get().pk
+
+        return super().form_valid(form)
+
+    # def form_invalid(self, form):
+    #     form.instance.user_id = self.request.user.pk
+    #     user = UserModel.objects.filter(pk=self.request.user.pk).get()
+    #     if not user.first_name or not user.last_seen:
+    #         raise ValidationError(
+    #             message='Please edit your account data, first and last names are required in order to sign a Petition')
+    #
+    #     return super().form_invalid(form)

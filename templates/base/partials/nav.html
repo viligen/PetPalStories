@@ -45,7 +45,7 @@
                         <ul class="dropdown-menu bg-light mt-2 border-0 rounded-0">
                             <li><a class="dropdown-item display-6 fs-6" href="{% url 'details user' pk=request.user.pk %}">My Account</a></li>
                             <li><a class="dropdown-item fs-6" href="{% url 'own published stories user' pk=request.user.pk %}">My Stories</a></li>
-                            <li><a class="dropdown-item fs-6" href="#">My Petitions</a></li>
+                            <li><a class="dropdown-item fs-6" href="{% url 'own petitions user' pk=request.user.pk %}">My Petitions</a></li>
                             <li><a class="dropdown-item fs-6" href="{% url 'messages user' pk=request.user.pk %}">My Messages<span class="bg-danger rounded-circle text-white fs-6 ps-1 pe-1">{% filter_new_msgs user=request.user %}</span></a></li>
                             <li><a class="dropdown-item fs-6" href="{% url 'favourite stories user' pk=request.user.pk %}">My Favourites</a></li>
                             <li>
