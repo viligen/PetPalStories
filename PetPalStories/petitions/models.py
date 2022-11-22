@@ -9,7 +9,7 @@ UserModel = get_user_model()
 
 
 class Petition(models.Model):
-    LOCATION_TARGET = ['Local', 'National', 'Worldwide']
+    LOCATION_TARGET = ['Local', 'National', 'Europe', 'Worldwide']
     CHOICES = [(c, c) for c in LOCATION_TARGET]
 
     MAX_LEN_TITLE = 50

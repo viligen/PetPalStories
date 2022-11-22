@@ -8,11 +8,12 @@ class StoryDeleteForm(forms.ModelForm):
         model = Story
         fields = ()
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field_name in self.fields:
-            self.fields[field_name].widget.attrs['disabled'] = 'disabled'
-            self.fields[field_name].widget.attrs['readonly'] = 'readonly'
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     for field_name in self.fields:
+    #
+    #         self.fields[field_name].widget.attrs['readonly'] = 'readonly'
+    #         self.fields[field_name].required = False
 
 
 class StoryEditForm(forms.ModelForm):

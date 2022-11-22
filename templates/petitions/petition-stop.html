@@ -4,16 +4,16 @@
 {% block main_content %}
 
     <div class="container w-60 text-center">
-        <h2>Delete Your Pet's Story</h2>
-        <h4>Story Title: {{ story.title }}</h4>
+        <h2>Stop Your Petition</h2>
+
 
     <div class="container w-50 text-start mt-5 mb-5">
-        <form class="form " method="post" action="{% url 'delete story' slug=story.slug %}" enctype="multipart/form-data">
+        <form class="form " method="post" action="{% url 'stop petition' slug=petition.slug %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}
                 <div class="text-center">
-                <button type="submit" class="btn btn-outline-danger">Confirm to Delete</button>
+                <button type="submit" class="btn btn-outline-danger">Stop Petition</button>
                 </div>
             {% endbuttons %}
 
