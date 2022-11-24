@@ -6,6 +6,7 @@ from django.views import generic
 
 from PetPalStories.accounts.forms import UserCreateForm
 from PetPalStories.common.models import FavouriteStory
+from PetPalStories.core.my_Mixins import OwnerRequiredMixin
 from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
 
@@ -38,7 +39,7 @@ class SignOutView(auth_views.LogoutView):
     next_page = reverse_lazy('index')
 
 
-class ProfileDetailsView(LoginRequiredMixin, generic.DetailView):
+class ProfileDetailsView(OwnerRequiredMixin, generic.DetailView):
 
     model = UserModel
     template_name = 'accounts/user-details.html'
@@ -53,7 +54,7 @@ class ProfileDetailsView(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class ProfileEditView(LoginRequiredMixin, generic.UpdateView):
+class ProfileEditView(OwnerRequiredMixin, generic.UpdateView):
     model = UserModel
     template_name = 'accounts/user-edit.html'
     context_object_name = 'profile'
@@ -65,7 +66,7 @@ class ProfileEditView(LoginRequiredMixin, generic.UpdateView):
         })
 
 
-class ProfileDeleteView(LoginRequiredMixin, generic.DeleteView):
+class ProfileDeleteView(OwnerRequiredMixin, generic.DeleteView):
     model = UserModel
     template_name = 'accounts/user-delete.html'
     success_url = reverse_lazy('index')

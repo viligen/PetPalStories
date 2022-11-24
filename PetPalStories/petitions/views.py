@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from PetPalStories.common.models import SignedPetition
+from PetPalStories.core.my_Mixins import OwnerRequiredMixin
 from PetPalStories.petitions.forms import PetitionCreateForm, PetitionEditForm, PetitionStopForm
 from PetPalStories.petitions.models import Petition
 
@@ -41,7 +42,7 @@ class PetitionAddView(auth_mixins.LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class PetitionEditView(auth_mixins.LoginRequiredMixin, generic.UpdateView):
+class PetitionEditView(OwnerRequiredMixin, generic.UpdateView):
     model = Petition
     template_name = 'petitions/petition-edit.html'
     context_object_name = 'petition'
@@ -74,7 +75,7 @@ class PetitionDetailsView(auth_mixins.LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class PetitionStopView(auth_mixins.LoginRequiredMixin, generic.UpdateView):
+class PetitionStopView(OwnerRequiredMixin, generic.UpdateView):
     model = Petition
     template_name = 'petitions/petition-stop.html'
     context_object_name = 'petition'

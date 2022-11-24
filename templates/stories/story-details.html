@@ -3,8 +3,8 @@
 {% load bootstrap5 %}
 
 {% block main_content %}
-    <div class="container text-center mt-5 mb-5">
-        <h2 class="">{{ story.title }}'s Details</h2>
+    <div class="container text-center mt-0 mb-5">
+        <h2 class="display-4">{{ story.title|capfirst }}'s Details</h2>
     </div>
     <div class="card container text-center mt-5">
 
@@ -17,17 +17,17 @@
             {% endif %}
 
             <div class="card-body col-6">
-                <h5 class="card-title">Title: {{ story.title }}</h5>
+                <h5 class="card-title">Title: {{ story.title|capfirst }}</h5>
                 <p class="card-text fw-6">Pet Name: {{ story.pet_name }}<span> Type: {{ story.pet_species }}</span></p>
-                <p class="card-text">Story: {{ story.story_text }}</p>
+                <p class="card-text">Story: {{ story.story_text|capfirst }}</p>
                 <hr>
                 <p class="card-text"><small class="text-muted">Published on: {{ story.published_on }}</small></p>
                 <p class="card-text"><small class="text-muted">Last updated: {{ story.edited_on }}</small></p>
                 <hr>
                 <div class="mt-5 mb-2">
                 {% if story.owner_id == request.user.id %}
-                    <a href="{% url 'edit story' slug=story.slug %}" class="btn btn-outline-warning">Edit Story</a>
-                    <a href="{% url 'delete story' slug=story.slug %}" class="btn btn-outline-danger">Delete Story</a>
+                    <a href="{% url 'edit story' slug=story.slug pk=request.user.pk %}" class="btn btn-outline-warning">Edit Story</a>
+                    <a href="{% url 'delete story' slug=story.slug pk=request.user.pk %}" class="btn btn-outline-danger">Delete Story</a>
                 {% else %}
                     <a href="{% url 'message story' slug=story.slug %}" class="btn btn-outline-info">Send Message</a>
                     {% if is_favourite is None %}

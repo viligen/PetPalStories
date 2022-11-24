@@ -1,9 +1,9 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block main_content %}
-    <div class="container w-50 mt-5">
-        <div class="card text-center">
-            <div class="card-header h3 display-5">
+    <div class="container w-60 mt-0 pt-5">
+        <div class="card text-center shadow">
+            <div class="card-header h6 display-6">
                 My Account Data
             </div>
             <div class="card-body">
@@ -19,9 +19,10 @@
                     <h5 class="card-title">Username: {{ profile.username }}</h5>
                     <h5 class="card-text">Email: {{ profile.email }}</h5>
                     <h6 class="card-text">Gender: {{ profile.gender }}</h6>
-                    <p class="card-text mt-2"><a class="text-muted" href="{% url 'own published stories user' pk=request.user.pk %}">Published Stories: {{ own_stories_count }}</a></p>
+                    <p class="card-text mt-5"><a class="text-muted" href="{% url 'own published stories user' pk=request.user.pk %}">Published Stories: {{ own_stories_count }}</a></p>
                     <p class="card-text"><a class="text-muted" href="{% url 'own petitions user' pk=request.user.pk %}">Active Own Petitions: {{ own_petitions_count }}</a></p>
-                    <p class="card-text"><a class="text-muted" href="{% url 'favourite stories user' pk=request.user.pk %}">Favourite Stories: {{ favourite_stories_count }}</a></p>
+                    <p class="card-text mb-5"><a class="text-muted" href="{% url 'favourite stories user' pk=request.user.pk %}">Favourite Stories: {{ favourite_stories_count }}</a></p>
+                    <a href="#" class="btn btn-outline-info">Change Password</a>
                     <a href="{% url 'edit user' pk=profile.pk %}" class="btn btn-outline-warning">Edit Data</a>
                     <a href="{% url 'delete user' pk=profile.pk %}" class="btn btn-outline-danger">Deactivate</a>
                 </div>

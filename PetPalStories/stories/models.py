@@ -13,7 +13,7 @@ class Story(models.Model):
     CHOICES = [(c, c) for c in SPECIES]
 
     MAX_LEN_TITLE = 50
-    MAX_LEN_PET = 20
+    MAX_LEN_PET = 15
     MIN_LEN_TEXT = 10
 
     ERROR_MESSAGE_TEXT_FIELD = f'You are supposed to enter at least {MIN_LEN_TEXT} characters'

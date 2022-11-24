@@ -1,7 +1,8 @@
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ValidationError
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import mixins as auth_mixins, get_user_model
 from django.urls import reverse_lazy
@@ -9,6 +10,7 @@ from django.views import generic
 
 from PetPalStories.common.forms import MessageStoryForm, SignedPetitionForm
 from PetPalStories.common.models import MessageStory, FavouriteStory, SignedPetition
+from PetPalStories.core.my_Mixins import OwnerRequiredMixin
 from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
 
@@ -38,7 +40,7 @@ class MessageStoryCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
         return context
 
     def get_success_url(self):
-
+        messages.success(self.request, 'Message was successfully sent')
         return reverse_lazy('messages user', kwargs={'pk': self.request.user.pk})
 
     def form_valid(self, form):
@@ -49,16 +51,17 @@ class MessageStoryCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
         return super().form_valid(form)
 
 
-class MessageListView(auth_mixins.LoginRequiredMixin, generic.ListView):
+class MessageListView(OwnerRequiredMixin, generic.ListView):
     model = MessageStory
     template_name = 'common/user-my-messages.html'
-    context_object_name = 'messages'
+    context_object_name = 'my_messages'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['new_messages'] = MessageStory.objects.filter(receiver=self.request.user.pk, is_read=False)
-        context['read_messages'] = MessageStory.objects.filter(receiver=self.request.user.pk, is_read=True)
+        received_msgs = MessageStory.objects.filter(receiver=self.request.user.pk)
+        context['new_messages'] = received_msgs.filter(is_read=False)
+        context['read_messages'] = received_msgs.filter(is_read=True)
         context['sent_messages'] = MessageStory.objects.filter(sender=self.request.user.pk)
         return context
 
@@ -77,7 +80,7 @@ def mark_as_read(request, pk_message, pk):
 def delete_message(request, pk_message, pk):
     message = MessageStory.objects.filter(pk=pk_message).get()
     message.delete()
-
+    messages.warning(request, 'Message was successfully deleted')
     return redirect('messages user', pk=pk)
 
 
@@ -88,13 +91,15 @@ def favourite_story(request, slug):
 
     if fav_story is not None:
         fav_story.get().delete()
+        messages.warning(request, 'Story was successfully removed from Favourites')
         return redirect('details story', slug=slug)
     fav_story = FavouriteStory(user=request.user, story=story)
     fav_story.save()
+    messages.success(request, 'Story was successfully added to Favourites')
     return redirect('details story', slug=slug)
 
 
-class MyFavouriteStories(auth_mixins.LoginRequiredMixin, generic.ListView):
+class MyFavouriteStories(OwnerRequiredMixin, generic.ListView):
     model = FavouriteStory
     template_name = 'common/user-my-favourite-stories.html'
     context_object_name = 'stories'
@@ -108,7 +113,7 @@ class MyFavouriteStories(auth_mixins.LoginRequiredMixin, generic.ListView):
         return context
 
 
-class MyPublishedStories(auth_mixins.LoginRequiredMixin, generic.ListView):
+class MyPublishedStories(OwnerRequiredMixin, generic.ListView):
     model = Story
     template_name = 'common/user-my-own-stories.html'
     context_object_name = 'stories'
@@ -120,25 +125,17 @@ class MyPublishedStories(auth_mixins.LoginRequiredMixin, generic.ListView):
         return context
 
 
-class MyOwnPetitions(auth_mixins.LoginRequiredMixin, generic.ListView):
+class MyOwnPetitions(OwnerRequiredMixin, generic.ListView):
     model = Petition
     template_name = 'common/user-my-own-petitions.html'
     context_object_name = 'petitions'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        context['my_petitions'] = Petition.objects.filter(owner_id=self.request.user.pk, is_active=True)
-        context['my_petitions_stopped'] = Petition.objects.filter(owner_id=self.request.user.pk, is_active=False)
+        own_petitions = Petition.objects.filter(owner_id=self.request.user.pk)
+        context['my_petitions'] = own_petitions.filter(is_active=True)
+        context['my_petitions_stopped'] = own_petitions.filter(is_active=False)
         return context
-
-
-# def sign_petition(request, slug):
-#     petition = Petition.objects.filter(slug=slug).get()
-#
-#     signed_petition = SignedPetition(user=request.user, petition=petition)
-#     signed_petition.save()
-#     return redirect('details petition', slug=slug)
 
 
 class SignPetitionCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView):
@@ -146,6 +143,15 @@ class SignPetitionCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
     form_class = SignedPetitionForm
     template_name = 'common/sign-petition.html'
     context_object_name = 'singed_petition'
+
+    def dispatch(self, request, *args, **kwargs):
+        user = UserModel.objects.filter(pk=self.request.user.pk).get()
+        if not user.first_name or not user.last_name:
+            messages.warning(request, 'You need to update your account details with first and/or last name'
+                                        ' in order to be able to sign a Petition off')
+            return redirect('edit user', pk=user.pk)
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -156,7 +162,7 @@ class SignPetitionCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
         return context
 
     def get_success_url(self):
-
+        messages.success(self.request, 'Petition was successfully signed')
         return reverse_lazy('details petition', kwargs={'slug': self.kwargs['slug']})
 
     def form_valid(self, form):
@@ -165,12 +171,3 @@ class SignPetitionCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
         form.instance.petition_id = Petition.objects.filter(slug=self.kwargs['slug']).get().pk
 
         return super().form_valid(form)
-
-    # def form_invalid(self, form):
-    #     form.instance.user_id = self.request.user.pk
-    #     user = UserModel.objects.filter(pk=self.request.user.pk).get()
-    #     if not user.first_name or not user.last_seen:
-    #         raise ValidationError(
-    #             message='Please edit your account data, first and last names are required in order to sign a Petition')
-    #
-    #     return super().form_invalid(form)

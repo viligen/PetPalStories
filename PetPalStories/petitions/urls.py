@@ -8,7 +8,7 @@ urlpatterns = [
     path('', PetitionsListView.as_view(), name='petitions'),
     path('add/', PetitionAddView.as_view(), name='add petition'),
     path('details/<slug:slug>/', PetitionDetailsView.as_view(), name='details petition'),
-    path('edit/<slug:slug>/', PetitionEditView.as_view(), name='edit petition'),
-    path('stop/<slug:slug>/', PetitionStopView.as_view(), name='stop petition'),
+    path('edit/<slug:slug>/<int:pk>/', PetitionEditView.as_view(), name='edit petition'),
+    path('stop/<slug:slug>/<int:pk>/', PetitionStopView.as_view(), name='stop petition'),
 
 ]

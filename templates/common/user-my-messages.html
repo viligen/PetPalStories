@@ -4,7 +4,7 @@
 {% block main_content %}
     <div class="container w-60">
         <div class="container-fluid text-center">
-            <h4 class="card-title-center display-4 mt-5 mb-5 p-5">New Messages</h4>
+            <h4 class="card-title-center display-6 mt-0 mb-5 p-5">New Messages</h4>
 
         </div>
 
@@ -18,8 +18,8 @@
                         <h6 class="card-title">Subject: {{ message.subject|truncatechars:20 }} <span class="ms-5">From: {{ message.sender }}</span><span class="text-muted ms-5">Sent on: {{ message.sent_on }}</span>
                         </h6>
                         <p class="card-text">Text: {{ message.text }}</p>
-                        <a href="{% url 'mark as read messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-primary opacity-50">Mark as Read</a>
-                        <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-danger opacity-50">Delete</a>
+                        <a href="{% url 'mark as read messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-outline-info">Mark as Read</a>
+                        <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-outline-danger">Delete</a>
                     </div>
                 </div>
             {% empty %}
@@ -29,7 +29,7 @@
 
         </div>
         <div class="container-fluid text-center">
-            <h4 class="card-title-center display-4 mt-5 mb-5 p-5">Read Messages</h4>
+            <h4 class="card-title-center display-6 mt-5 mb-5 p-5">Read Messages</h4>
 
         </div>
 
@@ -42,7 +42,7 @@
                         <h6 class="card-title">Subject: {{ message.subject|truncatechars:20 }} <span class="ms-5">From: {{ message.sender }}</span><span class="text-muted ms-5">Sent on: {{ message.sent_on }}</span>
                         </h6>
                         <p class="card-text">Text: {{ message.text }}</p>
-                        <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-danger opacity-50">Delete</a>
+                        <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-outline-danger">Delete</a>
                     </div>
                 </div>
             {% empty %}
@@ -53,11 +53,11 @@
         </div>
 
         <div class="container-fluid text-center">
-            <h4 class="card-title-center display-4 mt-5 mb-5 p-5">Sent Messages</h4>
+            <h4 class="card-title-center display-6 mt-5 mb-5 p-5">Sent Messages</h4>
 
         </div>
 
-        <div class="row mt-5 mb-5">
+        <div class="row mt-5 mb-0">
 
             {% for message in  sent_messages %}
 
@@ -68,7 +68,7 @@
                             <span class="text-muted ms-5">Seen on: {{message.seen_on|default_if_none:'Not seen yet'}}</span>
                         </h6>
                         <p class="card-text">Text: {{ message.text }}</p>
-                        <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-danger opacity-50">Delete</a>
+                        <a href="{% url 'delete messages' pk=request.user.pk pk_message=message.pk  %}" class="btn btn-outline-danger">Delete</a>
                     </div>
                 </div>
             {% empty %}

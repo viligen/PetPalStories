@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from PetPalStories.common.models import FavouriteStory
+from PetPalStories.core.my_Mixins import OwnerRequiredMixin, is_owner
 from PetPalStories.stories.forms import StoryDeleteForm, StoryEditForm
 from PetPalStories.stories.models import Story
 
@@ -58,17 +59,22 @@ class StoryDetailsView(auth_mixins.LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class StoryEditView(auth_mixins.LoginRequiredMixin, generic.UpdateView):
+class StoryEditView(OwnerRequiredMixin, generic.UpdateView):
     model = Story
     template_name = 'stories/story-edit.html'
     context_object_name = 'story'
     form_class = StoryEditForm
 
+    # def form_valid(self, form):
+    #     is_owner(request=self.request, obj=form.instance)
+    #     return super().form_valid(form)
+
     def get_success_url(self):
+
         return reverse_lazy('details story', kwargs={'slug': self.kwargs['slug']})
 
 
-class StoryDeleteView(auth_mixins.LoginRequiredMixin, generic.DeleteView):
+class StoryDeleteView(OwnerRequiredMixin, generic.DeleteView):
     model = Story
     template_name = 'stories/story-delete.html'
     context_object_name = 'story'

@@ -8,7 +8,7 @@
         <div class="card-body text-center">
             <h1 class="card-title-center display-4 p-3">PetPal Stories</h1>
         </div>
-        <div id="carouselExampleIndicators" class="carousel slide text-center rounded shadow" data-bs-ride="true">
+        <div id="carouselExampleIndicators" class="carousel slide text-center rounded-circle shadow" data-bs-ride="true">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                         aria-current="true" aria-label="Slide 1"></button>
@@ -18,7 +18,7 @@
                         aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner text-center">
-                <div class="carousel-item active w-60">
+                <div class="carousel-item active w-70">
                     <img src="{% static 'images/Riva1_resized.jpg' %}" class="d-block w-100 rounded-circle shadow" alt="riva1-image">
                 </div>
                 <div class="carousel-item">
@@ -39,14 +39,14 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <div class="container rounded shadow text-justify mt-1 mb-5 pt-3">
-            <p class="display-6 fs-6 card-text-center">My name is Riva and I'm the reason this site to exist... </p>
-            <p class="display-6 fs-6 card-text-center">Did I grab your attention? ..bark...bark..>))) </p>
+        <div class="container rounded shadow text mt-1 mb-3 pt-3">
+            <p class="display-6 fs-5 text-muted text-start">"I wasn't much of a beach girl...I didn't really like the sound of waves, it was quite scary...But what I did hate indeed was being left at home, all alone, staring at the door and howling... "</p>
+            <p class="display-6 fs-5 text-muted">Did she grab your attention? </p>
 
-            <p class="display-6 fs-6 card-text-center">If you like to read more about Riva and other pets like her, you are welcome to <a href="{% url 'login' %}">Sign in</a> or <a href="{% url 'register' %}">Sign up</a> and why not share your own favourite pet's <a href="{% url 'stories' %}">Stories</a> or support a cause by signing a <a href="">Petition</a></p>
-            <div class="container mt-3 mb-5 pb-3">
-            <a href="{% url 'login' %}" class="btn btn-outline-primary opacity-50">Sign In</a>
-            <a href="{% url 'register' %}" class="btn btn-outline-primary">Sign Up</a>
+            <p class="display-6 fs-6 card-text text-muted text-start">If you like to read more about Riva and other pets like her, you are welcome to <a class="text-muted fw-3" href="{% url 'login' %}">Sign in</a> or <a class="text-muted fw-3" href="{% url 'register' %}">Sign up</a> and why not share your own favourite pets <a class="text-muted fw-3" href="{% url 'stories' %}">Stories</a> or support a cause by signing a <a class="text-muted fw-3" href="{% url 'petitions' %}">Petition</a></p>
+            <div class="container mt-3 mb-0 pb-3">
+            <a href="{% url 'login' %}" class="btn btn-outline-info">Sign In</a>
+            <a href="{% url 'register' %}" class="btn btn-outline-info">Sign Up</a>
             </div>
         </div>
 

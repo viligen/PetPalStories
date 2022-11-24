@@ -1,4 +1,5 @@
-
+import os
+from django.contrib.messages import constants as messages
 
 from pathlib import Path
 
@@ -76,6 +77,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PetPalStories.wsgi.application'
 
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

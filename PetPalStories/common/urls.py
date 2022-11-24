@@ -22,7 +22,7 @@ urlpatterns = [
         path('message/', MessageStoryCreateView.as_view(), name='message story'),
         path('favourite/', favourite_story, name='favourite story'), ])),
 
-    path('petitions/<slug:slug>/sign/', SignPetitionCreateView.as_view(), name='sign petition'),
+    path('petitions/<slug:slug>/sign/<int:pk>/', SignPetitionCreateView.as_view(), name='sign petition'),
 
 
 ]
