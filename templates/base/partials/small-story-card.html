@@ -2,19 +2,19 @@
 {% load filter_is_favourite %}
 
 <div class="col-sm-3 gap-1 mt-3 mb-3">
-    <div class="card me-0 shadow" style="width: 16rem; height: 28rem;">
+    <div class="card me-0 shadow" style="max-width: 16rem; min-height: 28rem;">
         {% if story.image %}
             <img src="/media/{{ story.image }}" class="card-img-top" alt="pet image"
-                 style="width: 16rem; height: 14rem;">
+                 style="max-width: 16rem; height: 14rem;">
         {% else %}
             <img src="{% static 'images/default_animal_image.png' %}" class="card-img-top" alt="pet image"
-                 style="width: 16rem; height: 14rem;">
+                 style="max-width: 16rem; height: 14rem;">
         {% endif %}
         <div class="card-body">
-            <h5 class="card-title">Title: {{ story.title|truncatechars:15 }}</h5>
+            <h5 class="card-title">Title: {{ story.title|truncatechars:15|capfirst }}</h5>
             <p class="card-text">Pet's Name: {{ story.pet_name }}</p>
             <p class="card-text">Pet's Type: {{ story.pet_species }}</p>
-            <p class="card-text">{{ story.story_text|truncatechars:25 }}</p>
+            <p class="card-text">{{ story.story_text|truncatechars:25|capfirst }}</p>
             {% if request.user.is_authenticated %}
                 <div class="container mb-1 text-right">
                     <a href="{% url 'details story' slug=story.slug %}" class="btn btn-outline-info">Details</a>

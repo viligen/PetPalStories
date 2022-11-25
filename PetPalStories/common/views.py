@@ -11,6 +11,7 @@ from django.views import generic
 from PetPalStories.common.forms import MessageStoryForm, SignedPetitionForm
 from PetPalStories.common.models import MessageStory, FavouriteStory, SignedPetition
 from PetPalStories.core.my_Mixins import OwnerRequiredMixin
+from PetPalStories.core.utils import get_last_seen_unique
 from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
 
@@ -106,10 +107,10 @@ class MyFavouriteStories(OwnerRequiredMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        stories_fav = FavouriteStory.objects.filter(user_id=self.request.user.pk)
+        stories_fav = FavouriteStory.objects.filter(user_id=self.request.user.pk).order_by('-pk')
         context['stories_filtered'] = [Story.objects.filter(pk=s.story_id).get() for s in stories_fav]
-        last_seen_query = [Story.objects.filter(pk=pk).get() for pk in set(self.request.session.get('last_seen', []))][:5]
-        context['last_seen'] = last_seen_query
+
+        context['last_seen'] = get_last_seen_unique(self.request.session.get('last_seen', []))
         return context
 
 

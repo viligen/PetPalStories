@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from PetPalStories.common.models import FavouriteStory
-from PetPalStories.core.my_Mixins import OwnerRequiredMixin, is_owner
+from PetPalStories.core.my_Mixins import OwnerRequiredMixin
 from PetPalStories.stories.forms import StoryDeleteForm, StoryEditForm
 from PetPalStories.stories.models import Story
 

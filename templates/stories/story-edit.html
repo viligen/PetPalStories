@@ -7,7 +7,7 @@
         <h2>Edit Your Pet's Story</h2>
 
     <div class="container w-50 text-start mt-5 mb-5">
-        <form class="form " method="post" action="{% url 'edit story' slug=story.slug pk=request.user.pk %}" enctype="multipart/form-data">
+        <form class="form " method="post" action="{% url 'edit story' slug=story.slug %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}

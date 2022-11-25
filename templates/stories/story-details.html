@@ -26,8 +26,8 @@
                 <hr>
                 <div class="mt-5 mb-2">
                 {% if story.owner_id == request.user.id %}
-                    <a href="{% url 'edit story' slug=story.slug pk=request.user.pk %}" class="btn btn-outline-warning">Edit Story</a>
-                    <a href="{% url 'delete story' slug=story.slug pk=request.user.pk %}" class="btn btn-outline-danger">Delete Story</a>
+                    <a href="{% url 'edit story' slug=story.slug %}" class="btn btn-outline-warning">Edit Story</a>
+                    <a href="{% url 'delete story' slug=story.slug %}" class="btn btn-outline-danger">Delete Story</a>
                 {% else %}
                     <a href="{% url 'message story' slug=story.slug %}" class="btn btn-outline-info">Send Message</a>
                     {% if is_favourite is None %}

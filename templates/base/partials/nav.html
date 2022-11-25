@@ -2,10 +2,11 @@
 {% load static %}
 
 
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4" href="{% url 'index' %}"><img src="{% static 'images/default_animal_image.png' %}" class="card-img-top me-1" alt="pet image"
-                 style="width: 2rem; height: 2rem;">PetPalStories</a>
+        <a class="navbar-brand fs-4" href="{% url 'index' %}"><img src="{% static 'images/default_animal_image.png' %}"
+                                                                   class="card-img-top me-1" alt="pet image"
+                                                                   style="width: 2rem; height: 2rem;">PetPalStories</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,27 +32,39 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link fs-6 pt-3" href="{% url 'details user' pk=request.user.pk %}">You are signed in as {{ request.user.username }}</a>
+                        <a class="nav-link fs-6 pt-3 bg-secondary opacity-50 text-white rounded-pill" href="{% url 'details user' pk=request.user.pk %}">You are signed
+                            in as {{ request.user.username }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-4" href="{% url 'messages user' pk=request.user.pk %}">Messages<span class="bg-danger rounded-circle text-white fs-6 ps-1 pe-1">{% filter_new_msgs user=request.user %}</span></a>
+                        <a class="nav-link fs-4" href="{% url 'messages user' pk=request.user.pk %}">Messages<span
+                                class="badge bg-danger rounded-pill text-white fs-6 ps-1 pe-1">{% filter_new_msgs user=request.user %}</span></a>
                     </li>
 
                     <li class="nav-item dropdown me-4">
+
+
                         <a class="nav-link fs-4 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
                             Profile
                         </a>
-                        <ul class="dropdown-menu bg-light mt-2 border-0 rounded-0">
-                            <li><a class="dropdown-item display-6 fs-6" href="{% url 'details user' pk=request.user.pk %}">My Account</a></li>
-                            <li><a class="dropdown-item fs-6" href="{% url 'own published stories user' pk=request.user.pk %}">My Stories</a></li>
-                            <li><a class="dropdown-item fs-6" href="{% url 'own petitions user' pk=request.user.pk %}">My Petitions</a></li>
-                            <li><a class="dropdown-item fs-6" href="{% url 'messages user' pk=request.user.pk %}">My Messages<span class="bg-danger rounded-circle text-white fs-6 ps-1 pe-1">{% filter_new_msgs user=request.user %}</span></a></li>
-                            <li><a class="dropdown-item fs-6" href="{% url 'favourite stories user' pk=request.user.pk %}">My Favourites</a></li>
+                        <ul class="dropdown-menu bg-white mt-2 me-0 border-0 rounded-bottom-left-1">
+                            <li class="mb-3"><a class="dropdown-item display-6 fs-5 fw-6"
+                                   href="{% url 'details user' pk=request.user.pk %}">My Account</a></li>
+                            <li class="mb-3"><a class="dropdown-item fs-5 display-6" href="{% url 'messages user' pk=request.user.pk %}">My
+                                Messages<span
+                                        class="badge bg-danger rounded-pill text-white fs-6 ps-1 pe-1">{% filter_new_msgs user=request.user %}</span></a>
+                            </li>
+                            <li class="mb-3"><a class="dropdown-item fs-5 display-6"
+                                   href="{% url 'own published stories user' pk=request.user.pk %}">My Stories</a></li>
+                            <li class="mb-3"><a class="dropdown-item fs-5 display-6" href="{% url 'own petitions user' pk=request.user.pk %}">My
+                                Petitions</a></li>
+
+                            <li class="mb-3"><a class="dropdown-item fs-5 display-6"
+                                   href="{% url 'favourite stories user' pk=request.user.pk %}">My Favourites</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item fs-6 fw-bold" href="{% url 'logout' %}">Sign Out</a></li>
+                            <li class="mb-2"><a class="dropdown-item fs-5 display-6 fw-bold" href="{% url 'logout' %}">Sign Out</a></li>
                         </ul>
                     </li>
                 {% endif %}

@@ -15,11 +15,29 @@
 
                 <div class="card w-55 mb-1">
                     <div class="card-body">
-                        <h6 class="card-title">Subject: {{ message.subject|truncatechars:20 }} <span class="ms-5">From: {{ message.sender }}</span><span class="text-muted ms-5">Sent on: {{ message.sent_on }}</span>
-                        </h6>
-                        <p class="card-text">Text: {{ message.text }}</p>
-                        <a href="{% url 'mark as read messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-outline-info">Mark as Read</a>
-                        <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-outline-danger">Delete</a>
+                        <div class="row text-start">
+                            <div class="col-sm-4 card-body">Subject: {{ message.subject|truncatechars:20 }}
+                            </div>
+                            <div class="col-sm-2 card-body">From: {{ message.sender }}
+                            </div>
+                            <div class="col-sm-3 card-body text-muted">Sent on: {{ message.sent_on }}
+                            </div>
+                            <div class="col-sm-3 card-body text-muted">Seen on: {{ message.seen_on|default_if_none:'Not seen yet' }}
+                            </div>
+
+                        </div>
+                        <div class="row text-start">
+                            <div class="card-body">Text: {{ message.text }}</div>
+                        </div>
+                        <div class="row text-start">
+                            <div class="card-body">
+                            <a href="{% url 'mark as read messages' pk=request.user.id pk_message=message.pk %}"
+                               class="col-2 btn btn-outline-info me-2">Mark as Read</a>
+                            <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk %}"
+                               class="col-2 btn btn-outline-danger">Delete</a>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% empty %}
@@ -39,10 +57,26 @@
 
                 <div class="card w-55 mb-1">
                     <div class="card-body">
-                        <h6 class="card-title">Subject: {{ message.subject|truncatechars:20 }} <span class="ms-5">From: {{ message.sender }}</span><span class="text-muted ms-5">Sent on: {{ message.sent_on }}</span>
-                        </h6>
-                        <p class="card-text">Text: {{ message.text }}</p>
-                        <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk  %}" class="btn btn-outline-danger">Delete</a>
+                        <div class="row text-start">
+                            <div class="col-sm-4 card-body">Subject: {{ message.subject|truncatechars:20 }}
+                            </div>
+                            <div class="col-sm-2 card-body">From: {{ message.sender }}
+                            </div>
+                            <div class="col-sm-3 card-body text-muted">Sent on: {{ message.sent_on }}
+                            </div>
+                             <div class="col-sm-3 card-body text-muted">Seen on: {{ message.seen_on|default_if_none:'Not seen yet' }}
+                            </div>
+                        </div>
+                        <div class="row text-start">
+                            <div class="card-body">Text: {{ message.text }}</div>
+                        </div>
+                        <div class="row text-start">
+                            <div class="card-body">
+                                <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk %}"
+                                   class="col-2 btn btn-outline-danger">Delete</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             {% empty %}
@@ -63,12 +97,27 @@
 
                 <div class="card w-55 mb-1">
                     <div class="card-body">
-                        <h6 class="card-title">Subject: {{ message.subject|truncatechars:20 }} <span class="ms-5">To: {{ message.receiver }}
-                        </span><span class="text-muted ms-5">Sent on: {{ message.sent_on }}</span>
-                            <span class="text-muted ms-5">Seen on: {{message.seen_on|default_if_none:'Not seen yet'}}</span>
-                        </h6>
-                        <p class="card-text">Text: {{ message.text }}</p>
-                        <a href="{% url 'delete messages' pk=request.user.pk pk_message=message.pk  %}" class="btn btn-outline-danger">Delete</a>
+                        <div class="row text-start">
+                            <div class="col-sm-4 card-body">Subject: {{ message.subject|truncatechars:20 }}
+                            </div>
+                            <div class="col-sm-2 card-body">To: {{ message.receiver }}
+                            </div>
+                            <div class="col-sm-3 card-body text-muted">Sent on: {{ message.sent_on }}
+                            </div>
+                             <div class="col-sm-3 card-body text-muted">Seen on: {{ message.seen_on|default_if_none:'Not seen yet' }}
+                            </div>
+                        </div>
+                        <div class="row text-start">
+                            <div class="card-body">Text: {{ message.text }}</div>
+                        </div>
+                        <div class="row text-start">
+                            <div class="card-body">
+                                <a href="{% url 'delete messages' pk=request.user.id pk_message=message.pk %}"
+                                   class="col-2 btn btn-outline-danger">Delete</a>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             {% empty %}

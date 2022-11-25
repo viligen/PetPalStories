@@ -14,9 +14,3 @@ class OwnerRequiredMixin(LoginRequiredMixin):
             return redirect('index')
 
         return super().dispatch(request, *args, **kwargs)
-
-
-def is_owner(request, obj):
-    if obj.owner != request.user:
-        messages.error(request, 'You are not authorized to see this page')
-        return redirect('index')
