@@ -12,6 +12,9 @@ class AppUserAdmin(UserAdmin):
     form = UserEditForm
     add_form = UserCreateForm
 
+    list_display = ('id', 'username', 'first_name', 'last_name', 'email', 'is_staff', 'is_superuser', 'last_login',)
+    ordering = ('id', 'username', 'first_name', 'last_name', 'email', 'is_staff', 'last_login',)
+
     fieldsets = (
         (
             None,
@@ -54,6 +57,7 @@ class AppUserAdmin(UserAdmin):
             },
         ),
     )
+
 
     def get_form(self, request, obj=None, **kwargs):
         return super().get_form(request, obj, **kwargs)

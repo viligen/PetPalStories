@@ -33,8 +33,8 @@
                 <div class="col-sm-2 gap-1 mt-3 mb-3">
                 <a href="{% url 'details story' slug=story.slug %}" class="">
                     <div class="card me-0 shadow" style="width: 10rem; height: 10rem;">
-                        {% if story.image %}
-                            <img src="/media/{{ story.image }}" class="card-img-top" alt="pet image"
+                        {% if story.image.url %}
+                            <img src="{{ story.image.url }}" class="card-img-top" alt="pet image"
                                  style="width: 10rem; height: 7rem;">
                         {% else %}
                             <img src="{% static 'images/default_animal_image.png' %}" class="card-img-top"

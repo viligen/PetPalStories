@@ -4,6 +4,9 @@ from django.contrib.messages import constants as messages
 from pathlib import Path
 
 from django.urls import reverse_lazy
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
 
     'bootstrap5',
     'django_bootstrap5',
+    'cloudinary',
 
 
 
@@ -95,6 +99,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+cloudinary.config(
+  cloud_name="***REMOVED***",
+  api_key="***REMOVED***",
+  api_secret="***REMOVED***"
+)
 
 
 # Password validation

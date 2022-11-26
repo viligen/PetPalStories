@@ -5,6 +5,8 @@ from django.utils.text import slugify
 
 from PetPalStories.core.validators import validate_image_size
 
+from cloudinary.models import CloudinaryField
+
 UserModel = get_user_model()
 
 
@@ -45,15 +47,7 @@ class Petition(models.Model):
         )
     )
 
-    image = models.ImageField(
-        upload_to='petitions_images/',
-
-        validators=(
-            validate_image_size,
-        ),
-        null=True,
-        blank=True,
-    )
+    image = CloudinaryField('image', null=True, blank=True,)
 
     published_on = models.DateTimeField(
         auto_now_add=True,

@@ -5,6 +5,8 @@ from django.utils.text import slugify
 
 from PetPalStories.core.validators import validate_image_size
 
+from cloudinary.models import CloudinaryField
+
 UserModel = get_user_model()
 
 
@@ -33,15 +35,7 @@ class Story(models.Model):
         ),
         verbose_name="Pet's story"
     )
-    image = models.ImageField(
-        upload_to='stories_images/',
-
-        validators=(
-            validate_image_size,
-        ),
-        null=True,
-        blank=True,
-    )
+    image = CloudinaryField('image', null=True, blank=True,)
 
     pet_species = models.CharField(
         max_length=max(len(c) for c in SPECIES),

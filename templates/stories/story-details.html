@@ -4,13 +4,13 @@
 
 {% block main_content %}
     <div class="container text-center mt-0 mb-5">
-        <h2 class="display-4">{{ story.title|capfirst }}'s Details</h2>
+        <h2 class="display-5">{{ story.title|capfirst }}'s Details</h2>
     </div>
     <div class="card container text-center mt-5">
 
         <div class="card-body container row text-center">
-            {% if story.image %}
-                <img src="/media/{{ story.image }}" class="col-5 rounded-circle shadow" alt="{{ story.title }}'s image">
+            {% if story.image.url %}
+                <img src="{{ story.image.url }}" class="col-5 rounded-circle shadow" alt="{{ story.title }}'s image" style="max-height: 30rem;max-width: 30rem">
             {% else %}
                 <img src="{% static 'images/default_animal_image.png' %}" class="col-5 shadow rounded-circle"
                      alt="{{ story.title }}'s image">

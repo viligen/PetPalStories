@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import views as auth_views, get_user_model, authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -32,6 +33,7 @@ class SignUpView(generic.CreateView):
                                 email=form.cleaned_data['email']
                                 )
         login(self.request, new_user)
+        messages.success(self.request, 'Your registration was successful, you are now logged in')
         return redirect(self.success_url)
 
 
@@ -61,6 +63,7 @@ class ProfileEditView(OwnerRequiredMixin, generic.UpdateView):
     fields = ('first_name', 'last_name', 'username', 'email', 'gender',)
 
     def get_success_url(self):
+        messages.success(self.request, 'Profile  was successfully edited')
         return reverse_lazy('details user', kwargs={
             'pk': self.request.user.pk
         })
@@ -70,3 +73,13 @@ class ProfileDeleteView(OwnerRequiredMixin, generic.DeleteView):
     model = UserModel
     template_name = 'accounts/user-delete.html'
     success_url = reverse_lazy('index')
+
+
+class ProfileChangePasswordView(OwnerRequiredMixin, auth_views.PasswordChangeView):
+    template_name = 'accounts/user-change-password.html'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Password changed successfully')
+        return reverse_lazy('details user', kwargs={
+            'pk': self.request.user.pk
+        })

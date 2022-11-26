@@ -3,8 +3,8 @@
 
 <div class="col-sm-3 gap-1 mt-3 mb-3">
     <div class="card me-0 shadow" style="max-width: 16rem; min-height: 28rem;">
-        {% if story.image %}
-            <img src="/media/{{ story.image }}" class="card-img-top" alt="pet image"
+        {% if story.image.url %}
+            <img src="{{ story.image.url }}" class="card-img-top" alt="pet image"
                  style="max-width: 16rem; height: 14rem;">
         {% else %}
             <img src="{% static 'images/default_animal_image.png' %}" class="card-img-top" alt="pet image"

@@ -9,8 +9,8 @@
     <div class="card container text-center mt-5">
 
         <div class="card-body container row text-center">
-            {% if petition.image %}
-                <img src="/media/{{ petition.image }}" class="col-4 rounded-circle shadow" alt="{{ petition.title }}'s image">
+            {% if petition.image.url %}
+                <img src="{{ petition.image.url }}" class="col-4 rounded-circle shadow" alt="{{ petition.title }}'s image">
             {% else %}
                 <img src="{% static 'images/default_petition1.png' %}" class="col-4 shadow rounded-circle"
                      alt="{{ petition.title }}'s image">
@@ -30,8 +30,8 @@
                 <hr>
                 <div class="mt-5 mb-2">
                 {% if petition.owner_id == request.user.id %}
-                    <a href="{% url 'edit petition' slug=petition.slug pk=request.user.pk %}" class="btn btn-outline-warning">Edit Petition</a>
-                    <a href="{% url 'stop petition' slug=petition.slug pk=request.user.pk %}" class="btn btn-outline-danger">Stop Petition</a>
+                    <a href="{% url 'edit petition' slug=petition.slug  %}" class="btn btn-outline-warning">Edit Petition</a>
+                    <a href="{% url 'stop petition' slug=petition.slug  %}" class="btn btn-outline-danger">Stop Petition</a>
 
                 {% endif %}
                 {% if not is_signed %}

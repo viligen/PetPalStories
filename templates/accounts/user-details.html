@@ -22,7 +22,7 @@
                     <p class="card-text mt-5"><a class="text-muted" href="{% url 'own published stories user' pk=request.user.pk %}">Published Stories: {{ own_stories_count }}</a></p>
                     <p class="card-text"><a class="text-muted" href="{% url 'own petitions user' pk=request.user.pk %}">Active Own Petitions: {{ own_petitions_count }}</a></p>
                     <p class="card-text mb-5"><a class="text-muted" href="{% url 'favourite stories user' pk=request.user.pk %}">Favourite Stories: {{ favourite_stories_count }}</a></p>
-                    <a href="#" class="btn btn-outline-info">Change Password</a>
+                    <a href="{% url 'change password user' pk=profile.pk %}" class="btn btn-outline-info">Change Password</a>
                     <a href="{% url 'edit user' pk=profile.pk %}" class="btn btn-outline-warning">Edit Data</a>
                     <a href="{% url 'delete user' pk=profile.pk %}" class="btn btn-outline-danger">Deactivate</a>
                 </div>
