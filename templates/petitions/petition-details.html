@@ -26,7 +26,11 @@
                 <p class="card-text"><small class="text-muted">Published on: {{ petition.published_on }}</small></p>
                 <p class="card-text"><small class="text-muted">Last signed on: {{ last_signed_on}}</small></p>
                 <p class="card-text"><small class="text-muted">Last signed by: {{ last_signed_from }}</small></p>
+                {% if still_to_go < 0  %}
+                <p class="card-text"><small class="text-muted">Received {{ total_signatures }} total unique signatures so far </small></p>
+                {% else %}
                 <p class="card-text"><small class="text-muted">{{ still_to_go }} signatures to go </small></p>
+               {% endif %}
                 <hr>
                 <div class="mt-5 mb-2">
                 {% if petition.owner_id == request.user.id %}

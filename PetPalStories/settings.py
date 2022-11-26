@@ -106,6 +106,26 @@ cloudinary.config(
   api_secret="***REMOVED***"
 )
 
+# # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# # EMAIL_USE_SSL = True
+#
+# EMAIL_HOST_USER = '***REMOVED***'
+# EMAIL_HOST_PASSWORD = '***REMOVED***'
+# EMAIL_PORT = 587
+# DEFAULT_FROM_EMAIL = '***REMOVED***'
+
+EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+EMAIL_HOST = '***REMOVED***'
+MAILJET_API_KEY = "***REMOVED***"
+MAILJET_API_SECRET = "***REMOVED***"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_TIMEOUT = 30
+DEFAULT_FROM_EMAIL = '***REMOVED***'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

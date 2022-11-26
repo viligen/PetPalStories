@@ -71,6 +71,7 @@ class PetitionDetailsView(auth_mixins.LoginRequiredMixin, generic.DetailView):
             context['last_signed_on'] = 'N/A'
             context['last_signed_from'] = 'N/A'
         total_signatures = singed_petition_objs.count()
+        context['total_signatures'] = total_signatures
         context['still_to_go'] = self.object.goal - total_signatures
         return context
 
