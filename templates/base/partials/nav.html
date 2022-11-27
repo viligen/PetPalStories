@@ -2,7 +2,7 @@
 {% load static %}
 
 
-<nav class="navbar navbar-expand-lg bg-white">
+<nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand fs-4" href="{% url 'index' %}"><img src="{% static 'images/default_animal_image.png' %}"
                                                                    class="card-img-top me-1" alt="pet image"
@@ -31,8 +31,8 @@
                         <a class="nav-link fs-4" href="{% url 'register' %}">Sign Up</a>
                     </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link fs-6 pt-3 bg-secondary opacity-50 text-white rounded-pill" href="{% url 'details user' pk=request.user.pk %}">You are signed
+                    <li class="nav-item pt-2">
+                        <a class="nav-link fs-6 bg-secondary opacity-50 text-white rounded-pill" href="{% url 'details user' pk=request.user.pk %}">You are signed
                             in as {{ request.user.username }}</a>
                     </li>
                     <li class="nav-item">
@@ -47,7 +47,7 @@
                            aria-expanded="false">
                             Profile
                         </a>
-                        <ul class="dropdown-menu bg-white mt-2 me-0 border-0 rounded-bottom-left-1">
+                        <ul class="dropdown-menu bg-light mt-1 me-0 border-0 rounded-bottom">
                             <li class="mb-3"><a class="dropdown-item display-6 fs-5 fw-6"
                                    href="{% url 'details user' pk=request.user.pk %}">My Account</a></li>
                             <li class="mb-3"><a class="dropdown-item fs-5 display-6" href="{% url 'messages user' pk=request.user.pk %}">My

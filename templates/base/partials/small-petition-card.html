@@ -1,7 +1,7 @@
 {% load static %}
 
 
-<div class="card mb-3 shadow" style="max-width: 70rem;">
+<div class="card mb-3 shadow px-3" > {#style="max-width: 70rem;"#}
   <div class="row g-0">
     <div class="col-md-4">
         {% if petition.image.url %}
@@ -11,16 +11,16 @@
 
         {% else %}
             <img src="{% static 'images/default_petition1.png' %}" class="img-fluid rounded-start" alt="petition image"
-                 style="width: 90%; max-height:10rem;">
+                 style="width: 80%; max-height:10rem;">
         {% endif %}
         </div>
-        <div class="col-md-8 mt-2">
+        <div class="col-md-8 mt-2 text-start ps-5">
             <h5 class="card-title">Title: {{ petition.title|capfirst }}</h5>
             <p class="card-text mb-1">Target Location: {{ petition.location }}</p>
             <p class="card-text mb-1">Goal: {{ petition.goal }} unique signatures</p>
-            <p class="card-text">Description: {{ petition.description|truncatechars:40|capfirst }}</p>
+            <p class="card-text">Description: {{ petition.description|truncatechars:110|capfirst }}</p>
             {% if request.user.is_authenticated and petition.is_active %}
-                <p class="card-text mb-2 text-center">
+                <p class="card-text mb-2 text-start">
                     <a href="{% url 'details petition' slug=petition.slug %}" class="btn btn-outline-info">Details</a>
                     {% if petition.owner == request.user and petition.is_active %}
                         <a href="{% url 'stop petition' slug=petition.slug %}" class="btn btn-outline-danger">Stop</a>

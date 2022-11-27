@@ -7,7 +7,7 @@ from django.views import generic
 
 from PetPalStories.accounts.forms import UserCreateForm
 from PetPalStories.common.models import FavouriteStory
-from PetPalStories.core.my_Mixins import OwnerRequiredMixin
+from PetPalStories.core.my_Mixins import OwnershipRequiredMixin
 from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
 
@@ -41,7 +41,7 @@ class SignOutView(auth_views.LogoutView):
     next_page = reverse_lazy('index')
 
 
-class ProfileDetailsView(OwnerRequiredMixin, generic.DetailView):
+class ProfileDetailsView(OwnershipRequiredMixin, generic.DetailView):
 
     model = UserModel
     template_name = 'accounts/user-details.html'
@@ -56,7 +56,7 @@ class ProfileDetailsView(OwnerRequiredMixin, generic.DetailView):
         return context
 
 
-class ProfileEditView(OwnerRequiredMixin, generic.UpdateView):
+class ProfileEditView(OwnershipRequiredMixin, generic.UpdateView):
     model = UserModel
     template_name = 'accounts/user-edit.html'
     context_object_name = 'profile'
@@ -69,13 +69,13 @@ class ProfileEditView(OwnerRequiredMixin, generic.UpdateView):
         })
 
 
-class ProfileDeleteView(OwnerRequiredMixin, generic.DeleteView):
+class ProfileDeleteView(OwnershipRequiredMixin, generic.DeleteView):
     model = UserModel
     template_name = 'accounts/user-delete.html'
     success_url = reverse_lazy('index')
 
 
-class ProfileChangePasswordView(OwnerRequiredMixin, auth_views.PasswordChangeView):
+class ProfileChangePasswordView(OwnershipRequiredMixin, auth_views.PasswordChangeView):
     template_name = 'accounts/user-change-password.html'
 
     def get_success_url(self):

@@ -10,7 +10,7 @@ from django.views import generic
 
 from PetPalStories.common.forms import MessageStoryForm, SignedPetitionForm
 from PetPalStories.common.models import MessageStory, FavouriteStory, SignedPetition
-from PetPalStories.core.my_Mixins import OwnerRequiredMixin
+from PetPalStories.core.my_Mixins import OwnershipRequiredMixin
 from PetPalStories.core.utils import get_last_seen_unique
 from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
@@ -52,7 +52,7 @@ class MessageStoryCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
         return super().form_valid(form)
 
 
-class MessageListView(OwnerRequiredMixin, generic.ListView):
+class MessageListView(OwnershipRequiredMixin, generic.ListView):
     model = MessageStory
     template_name = 'common/user-my-messages.html'
     context_object_name = 'my_messages'
@@ -100,7 +100,7 @@ def favourite_story(request, slug):
     return redirect('details story', slug=slug)
 
 
-class MyFavouriteStories(OwnerRequiredMixin, generic.ListView):
+class MyFavouriteStories(OwnershipRequiredMixin, generic.ListView):
     model = FavouriteStory
     template_name = 'common/user-my-favourite-stories.html'
     context_object_name = 'stories'
@@ -114,7 +114,7 @@ class MyFavouriteStories(OwnerRequiredMixin, generic.ListView):
         return context
 
 
-class MyPublishedStories(OwnerRequiredMixin, generic.ListView):
+class MyPublishedStories(OwnershipRequiredMixin, generic.ListView):
     model = Story
     template_name = 'common/user-my-own-stories.html'
     context_object_name = 'stories'
@@ -126,7 +126,7 @@ class MyPublishedStories(OwnerRequiredMixin, generic.ListView):
         return context
 
 
-class MyOwnPetitions(OwnerRequiredMixin, generic.ListView):
+class MyOwnPetitions(OwnershipRequiredMixin, generic.ListView):
     model = Petition
     template_name = 'common/user-my-own-petitions.html'
     context_object_name = 'petitions'

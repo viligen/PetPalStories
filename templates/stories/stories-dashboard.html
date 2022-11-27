@@ -4,11 +4,11 @@
 
 {% block main_content %}
     <div class="container-fluid text-center">
-        <h1 class="card-title-center display-4 mt-0 mb-5 p-5">Pets Stories</h1>
+        <h1 class="card-title-center display-5 mt-0 mb-5 p-5">Pets Stories</h1>
         {% if request.user.is_authenticated %}
 
             <div class="container mt-5 mb-5">
-                <a href="{% url 'add story' %}" class="btn btn-outline-info">Add a New Story</a>
+                <a href="{% url 'add story' %}" class="btn btn-info">Add a New Story</a>
 
             </div>
         {% endif %}
@@ -16,15 +16,15 @@
     <div class = "container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
           <form class="d-flex" role="search" method="GET" action="{% url 'stories' %}">
             <input class="form-control me-2" type="search" placeholder="Search by pet name or pet type..." aria-label="Search" name="query" value="{{ request.GET.query }}">
-            <button class="btn btn-outline-info" type="submit">Search</button>
+            <button class="btn btn-info" type="submit">Search</button>
           </form>
     </div>
 
     <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a class="btn btn-outline-info" href="?page=1">&laquo; first</a>
-            <a class="btn btn-outline-info" href="?page={{ page_obj.previous_page_number }}">prev</a>
+            <a class="btn btn-info" href="?page=1">&laquo; first</a>
+            <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">prev</a>
         {% endif %}
 
         <span class="current text-muted h6">
@@ -32,13 +32,13 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a class="btn btn-outline-info" href="?page={{ page_obj.next_page_number }}">next</a>
-            <a class="btn btn-outline-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
     </span>
     </div>
 
-    <div class="row mt-5 mb-5">
+    <div class="row mt-5 mb-5 p-5 bg-light shadow rounded">
 
 
         {% for story in  stories %}

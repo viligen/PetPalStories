@@ -7,7 +7,7 @@
         <h2>Delete Your Pet's Story</h2>
         <h4>Story Title: {{ story.title }}</h4>
 
-    <div class="container w-50 text-start mt-5 mb-5">
+    <div class="container w-50 text-start mt-5 mb-5 p-5 bg-light shadow rounded">
         <form class="form " method="post" action="{% url 'delete story' slug=story.slug %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}

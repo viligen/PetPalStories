@@ -1,6 +1,6 @@
 from PetPalStories.stories.models import Story
 
-MAX_LAST_SEEN = 5
+MAX_LAST_SEEN = 6
 
 
 def get_last_seen_unique(pk_list):

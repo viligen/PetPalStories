@@ -6,7 +6,7 @@
     <div class="container w-60 text-center">
         <h2>Profile Edit Form</h2>
 
-    <div class="container w-50 text-start mt-5 mb-5">
+    <div class="container w-50 text-start mt-5 mb-5 p-5 bg-light shadow rounded">
         <form class="form" method="post" action="{% url 'edit user' pk=request.user.pk %}" >
             {% csrf_token %}
             {% bootstrap_form form %}

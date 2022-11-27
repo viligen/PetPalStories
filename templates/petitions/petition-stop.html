@@ -7,7 +7,7 @@
         <h2>Stop Your Petition</h2>
 
 
-    <div class="container w-50 text-start mt-5 mb-5">
+    <div class="container w-50 text-start mt-5 mb-5 p-5 bg-light shadow rounded">
         <form class="form " method="post" action="{% url 'stop petition' slug=petition.slug %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
