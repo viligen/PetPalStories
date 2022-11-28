@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 UserModel = get_user_model()
@@ -10,7 +10,7 @@ class Post(models.Model):
     ERROR_MESSAGE_TOPIC = f'You are supposed to enter at least {MIN_LEN_TOPIC} characters'
 
     topic = models.TextField(
-       validators=(MinValueValidator(MIN_LEN_TOPIC, message=ERROR_MESSAGE_TOPIC), )
+       validators=(MinLengthValidator(MIN_LEN_TOPIC, message=ERROR_MESSAGE_TOPIC), )
     )
 
     published_on = models.DateTimeField(

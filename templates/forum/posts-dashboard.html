@@ -4,18 +4,18 @@
 
 {% block main_content %}
     <div class="container-fluid text-center">
-        <h1 class="card-title-center display-5 mt-0 mb-5 p-5">Active Petitions</h1>
+        <h1 class="card-title-center display-5 mt-0 mb-5 p-5">Forum Posts</h1>
         {% if request.user.is_authenticated %}
 
             <div class="container mt-5 mb-5">
-                <a href="{% url 'add petition' %}" class="btn btn-info">Start a New Petition</a>
+                <a href="{% url 'add post' %}" class="btn btn-info">Create a New Post</a>
 
             </div>
         {% endif %}
     </div>
     <div class = "container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
-          <form class="d-flex" role="search" method="GET" action="{% url 'petitions' %}">
-            <input class="form-control me-2" type="search" placeholder="Search by title or target location (e.g. 'national')..." aria-label="Search" name="query" value="{{ request.GET.query }}">
+          <form class="d-flex" role="search" method="GET" action="{% url 'forum dashboard' %}">
+            <input class="form-control me-2" type="search" placeholder="Search by topic..." aria-label="Search" name="query" value="{{ request.GET.query }}">
             <button class="btn btn-info" type="submit">Search</button>
           </form>
     </div>
@@ -41,10 +41,10 @@
     <div class="container-fluid mt-3 mb-3 p-5  shadow rounded">
 
 
-        {% for petition in  petitions %}
-            {% include 'base/partials/small-petition-card.html' with petition=petition %}
+        {% for post in  posts %}
+            {% include 'base/partials/small-post-card.html' with post=post %}
         {% empty %}
-            <h2 class="d-block text-center"> No Active Petitions </h2>
+            <h2 class="d-block text-center"> No Published Post </h2>
         {% endfor %}
 
 

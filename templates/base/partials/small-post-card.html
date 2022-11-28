@@ -1,0 +1,38 @@
+{% load static %}
+
+
+<div class="card mb-3 shadow px-3"> {#style="max-width: 70rem;"#}
+    <div class="row g-0">
+
+        <div class="row mt-2 text-start pt-2">
+            <p class="card-title fw-bold">Topic: {{ post.topic|capfirst }}</p>
+        </div>
+        <div class="row text-start">
+            <p class="card-text mb-1 text-muted col-sm-4 ">Published on: {{ post.published_on }}</p>
+            <p class="card-text mb-1 text-muted col-sm-4">Published by: {{ post.owner.username }}</p>
+            {% if request.user.is_authenticated %}
+                <p class="card-text mb-2 col-sm-4 text-start ps-2">
+                    <button data-id= "{{ post.pk }}" class="btn btn-outline-info"> See Comments</button>
+
+                </p>
+            {% endif %}
+        </div>
+            {% if  request.user.is_authenticated %}
+                <div class="mb-3 row text-start">
+                    <form class="form row">
+                        <label for="{{ post.pk }}" class="form-label"></label>
+                        <p class="col-sm-8 text-start">
+                            <textarea class="form-control" id="{{ post.pk }}" rows="1"
+                                      placeholder="Type your comment here..."></textarea>
+                        </p>
+                        <p class="col-sm-4 text-start ps-4">
+                            <button data-id= "{{ post.pk }}" type="submit" class="btn btn-outline-info">Send</button>
+                        </p>
+                    </form>
+                </div>
+
+
+
+            {% endif %}
+    </div>
+</div>
