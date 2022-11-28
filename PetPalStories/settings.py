@@ -16,15 +16,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '***REMOVED***'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = [
-    '***REMOVED***',
-    '***REMOVED***',
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '***REMOVED***').split(' ')
 
 
 # Application definition
@@ -41,6 +38,7 @@ INSTALLED_APPS = [
     'PetPalStories.accounts',
     'PetPalStories.stories',
     'PetPalStories.petitions',
+    'PetPalStories.forum',
 
     'bootstrap5',
     'django_bootstrap5',
@@ -92,38 +90,30 @@ MESSAGE_TAGS = {
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 cloudinary.config(
-  cloud_name="***REMOVED***",
-  api_key="***REMOVED***",
-  api_secret="***REMOVED***"
+  cloud_name=os.environ.get('cloud_name'),
+  api_key=os.environ.get('api_key'),
+  api_secret=os.environ.get('api_secret')
 )
 
-# # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_USE_TLS = True
-# # EMAIL_USE_SSL = True
-#
-# EMAIL_HOST_USER = '***REMOVED***'
-# EMAIL_HOST_PASSWORD = '***REMOVED***'
-# EMAIL_PORT = 587
-# DEFAULT_FROM_EMAIL = '***REMOVED***'
 
-EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
-EMAIL_HOST = '***REMOVED***'
-MAILJET_API_KEY = "***REMOVED***"
-MAILJET_API_SECRET = "***REMOVED***"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_TIMEOUT = 30
-DEFAULT_FROM_EMAIL = '***REMOVED***'
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+MAILJET_API_KEY = os.environ.get('MAILJET_API_KEY')
+MAILJET_API_SECRET = os.environ.get('MAILJET_API_SECRET')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+EMAIL_TIMEOUT = os.environ.get('EMAIL_TIMEOUT')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 
 

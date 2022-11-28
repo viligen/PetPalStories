@@ -14,6 +14,7 @@ urlpatterns = [
     path('accounts/', include('PetPalStories.accounts.urls')),
     path('stories/', include('PetPalStories.stories.urls')),
     path('petitions/', include('PetPalStories.petitions.urls')),
+    path('forum/', include('PetPalStories.forum.urls')),
 ]
 
 if settings.DEBUG:
