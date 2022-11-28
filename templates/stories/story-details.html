@@ -13,13 +13,13 @@
                 <img src="{{ story.image.url }}" class="col-5 rounded-circle shadow" alt="{{ story.title }}'s image" style="max-height: 30rem;max-width: 30rem">
             {% else %}
                 <img src="{% static 'images/default_animal_image.png' %}" class="col-5 shadow rounded-circle"
-                     alt="{{ story.title }}'s image">
+                     alt="{{ story.title }}'s image" style="max-height: 30rem;max-width: 30rem">
             {% endif %}
 
-            <div class="card-body col-6">
+            <div class="card-body col-6 ps-5">
                 <h5 class="card-title">Title: {{ story.title|capfirst }}</h5>
                 <p class="card-text fw-6">Pet Name: {{ story.pet_name }}<span> Type: {{ story.pet_species }}</span></p>
-                <p class="card-text">Story: {{ story.story_text|capfirst }}</p>
+                <p class="card-text ">Story: {{ story.story_text|capfirst }}</p>
                 <hr>
                 <p class="card-text"><small class="text-muted">Published on: {{ story.published_on }}</small></p>
                 <p class="card-text"><small class="text-muted">Last updated: {{ story.edited_on }}</small></p>
