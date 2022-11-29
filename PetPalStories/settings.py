@@ -39,10 +39,13 @@ INSTALLED_APPS = [
     'PetPalStories.stories',
     'PetPalStories.petitions',
     'PetPalStories.forum',
+    'PetPalStories.api',
 
     'bootstrap5',
     'django_bootstrap5',
     'cloudinary',
+    'rest_framework',
+
 
 
 

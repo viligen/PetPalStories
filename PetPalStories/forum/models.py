@@ -48,7 +48,7 @@ class Comment(models.Model):
         blank=True,
     )
 
-    post_parent = models.ForeignKey(
+    parent_post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
         null=False,

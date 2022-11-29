@@ -13,11 +13,12 @@
             </div>
         {% endif %}
     </div>
-    <div class = "container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
-          <form class="d-flex" role="search" method="GET" action="{% url 'forum dashboard' %}">
-            <input class="form-control me-2" type="search" placeholder="Search by topic..." aria-label="Search" name="query" value="{{ request.GET.query }}">
+    <div class="container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
+        <form class="d-flex" role="search" method="GET" action="{% url 'forum dashboard' %}">
+            <input class="form-control me-2" type="search" placeholder="Search by topic or username..."
+                   aria-label="Search" name="query" value="{{ request.GET.query }}">
             <button class="btn btn-info" type="submit">Search</button>
-          </form>
+        </form>
     </div>
 
     <div class="pagination">
@@ -38,7 +39,7 @@
     </span>
     </div>
 
-    <div class="container-fluid mt-3 mb-3 p-5  shadow rounded">
+    <div data-id="comments" class="container-fluid mt-3 mb-3 p-5  shadow rounded">
 
 
         {% for post in  posts %}
@@ -49,4 +50,66 @@
 
 
     </div>
+{% endblock %}
+
+{% block my_scripts %}
+    <script>
+        const renderCommentsList = (comments) => {
+
+            const commentItems = comments.map(comment => `
+            <div class="row border rounded bg-light p-2 mb-1">
+                <div class="col-sm-6"><strong>${comment.owner.username}</strong>: ${comment.text}</div>
+                <div class="col-sm-6 ps-5 text-muted text-end">commented on: ${comment.published_on}</div>
+            </div>`);
+
+            return `<div class="mt-2">${commentItems.join(' ')}</div>`
+        };
+
+        function getComments(ev) {
+            if (ev.target.tagName === 'BUTTON' && ev.target.textContent === 'See Comments') {
+                let post_pk = ev.target.dataset.id
+
+                fetch("{% url 'post comments' %}" + `?query=${post_pk}`)
+                    .then(response => response.json())
+                    .then(comments => {
+                        let dataId = "comments-per-post" + `${post_pk}`
+
+                        document.querySelector(`div[data-name=${CSS.escape(dataId)}]`).innerHTML =
+                            renderCommentsList(comments);
+
+                    });
+
+
+            } else if (ev.target.tagName === 'BUTTON' && ev.target.type === 'submit') {
+                ev.preventDefault()
+
+                let post_id = ev.target.dataset.post
+                let user_id = ev.target.dataset.user
+
+                let csrf_token = ev.target.dataset.csrf
+
+                let textValue = document.getElementById(`${post_id}`).value
+
+                const data = JSON.stringify({'text':textValue, 'owner': user_id, 'parent_post': post_id})
+                console.log(data)
+                if (textValue.trim() !== ''){
+                    fetch("{% url 'add post comment' %}", {method:'POST',
+                        headers:{'Content-Type': 'application/json', 'X-CSRFToken': csrf_token},
+                        body:data})
+                    .then(response => response.json())
+                    document.getElementById(`${post_id}`).value = ''
+                    location.reload()
+                    document.querySelector(`button[data-id=${CSS.escape(post_id)}]`).click()
+
+                }
+            }
+
+        }
+
+        window.onload = () => {
+            document.querySelector('div[data-id="comments"]').addEventListener("click", getComments)
+        }
+
+
+    </script>
 {% endblock %}

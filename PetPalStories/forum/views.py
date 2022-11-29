@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -20,7 +21,7 @@ class PostsListView(generic.ListView):
 
         object_list = self.model.objects.all()
         if query:
-            object_list = object_list.filter(topic__icontains=query)
+            object_list = object_list.filter(Q(topic__icontains=query) | Q(owner__username__icontains=query))
         return object_list
 
 
