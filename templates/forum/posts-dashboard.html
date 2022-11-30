@@ -15,7 +15,7 @@
     </div>
     <div class="container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
         <form class="d-flex" role="search" method="GET" action="{% url 'forum dashboard' %}">
-            <input class="form-control me-2" type="search" placeholder="Search by topic or username..."
+            <input class="form-control me-2 " type="search" placeholder="Search by topic or author's username..."
                    aria-label="Search" name="query" value="{{ request.GET.query }}">
             <button class="btn btn-info" type="submit">Search</button>
         </form>
@@ -54,15 +54,20 @@
 
 {% block my_scripts %}
     <script>
+
+        function delay(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
+        }
+
         const renderCommentsList = (comments) => {
 
             const commentItems = comments.map(comment => `
-            <div class="row border rounded bg-light p-2 mb-1">
-                <div class="col-sm-6"><strong>${comment.owner.username}</strong>: ${comment.text}</div>
-                <div class="col-sm-6 ps-5 text-muted text-end">commented on: ${comment.published_on}</div>
+            <div class="row border  rounded bg-light p-2 mb-1">
+                <div class="col-sm-6"><strong class="border border-info rounded-circle bg-info bg-opacity-50 p-1">${comment.owner.username}</strong> : ${comment.text}</div>
+                <div class="col-sm-6 ps-5 text-muted text-end">commented on: ${new Date(comment.published_on)}</div>
             </div>`);
 
-            return `<div class="mt-2">${commentItems.join(' ')}</div>`
+            return `<div class="mt-2 ps-4">${commentItems.join(' ')}</div>`
         };
 
         function getComments(ev) {
@@ -96,7 +101,7 @@
                     'owner': {'id': user_id, 'username': user_id},
                     'parent_post': {'id': post_id}
                 })
-                console.log(data)
+
 
                 if (textValue.trim() !== '') {
                     fetch("{% url 'add post comment' %}", {
@@ -106,11 +111,6 @@
                     })
                         .then(response => response.json())
                     document.getElementById(`${post_id}`).value = ''
-                    {#location.reload()#}
-
-                    function delay(time) {
-                        return new Promise(resolve => setTimeout(resolve, time));
-                    }
 
                     delay(400).then(() => document.querySelector(`button[data-id=${CSS.escape(post_id)}]`).click());
 
