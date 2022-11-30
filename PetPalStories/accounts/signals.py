@@ -13,7 +13,7 @@ def send_email_on_signup(instance, created, **kwargs):
     user_email = instance.email
     send_mail(
         subject='Welcome to PetPalStories!',
-        message='Hi, you have successfully created your profile at PetPalStories. Enjoy!',
+        message=f'Hello there {instance.username}, you have successfully created your profile at PetPalStories. Enjoy!',
         from_email=None,
         recipient_list=(user_email, ),
     )

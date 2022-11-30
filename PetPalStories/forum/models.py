@@ -57,3 +57,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('published_on',)
+
+
+from . import signals
