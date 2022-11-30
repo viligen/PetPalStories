@@ -26,7 +26,7 @@
                                       placeholder="Type your comment here..."></textarea>
                         </p>
                         <p class="col-sm-4 text-start ps-4">
-                            <button data-id= "{{ post.id }}" data-post= "{{ post.pk }}" data-user="{{ request.user.pk }}" data-csrf="{{ csrf_token }}" type="submit" class="btn btn-outline-info">Send Comment</button>
+                            <button data-id= "{{ post.id }}" data-post= "{{ post.pk }}" data-user="{{ request.user.pk }}" data-username="{{ request.user.username }}" data-csrf="{{ csrf_token }}" type="submit" class="btn btn-outline-info">Send Comment</button>
                         </p>
                     </form>
                 </div>

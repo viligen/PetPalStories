@@ -5,6 +5,7 @@ from PetPalStories.forum.models import Post, Comment
 
 UserModel = get_user_model()
 
+
 #
 # class TextSerializer(serializers.Serializer):
 #     text = serializers.CharField()
@@ -13,19 +14,19 @@ UserModel = get_user_model()
 class PartInfoUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('id', 'username',)
+        fields = ('id', 'username')
 
 
 class PostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ('id',)
 
 
 class CommentSerializer(serializers.ModelSerializer):
     parent_post = PostSerializer()
     owner = PartInfoUserSerializer()
+
     # text = TextSerializer()
 
     class Meta:
@@ -33,9 +34,10 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
+        parent_post = validated_data.pop('parent_post')
 
-        return Comment.objects.create(
-            **validated_data,
-            parent_post=Post.objects.get(id=validated_data['parent_post']),
-            owner=UserModel.objects.get(id=validated_data['owner'])
-        )
+        owner = validated_data.pop('owner')
+
+        return Comment.objects.create(text=validated_data['text'],
+                                      parent_post=Post.objects.get(id=self._kwargs['data']['parent_post']['id']),
+                                      owner=UserModel.objects.get(id=self._kwargs['data']['owner']['id']))

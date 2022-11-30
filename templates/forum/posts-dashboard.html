@@ -85,21 +85,35 @@
 
                 let post_id = ev.target.dataset.post
                 let user_id = ev.target.dataset.user
+                let username = ev.target.dataset.username
 
                 let csrf_token = ev.target.dataset.csrf
 
                 let textValue = document.getElementById(`${post_id}`).value
 
-                const data = JSON.stringify({'text':textValue, 'owner': user_id, 'parent_post': post_id})
+                let data = JSON.stringify({
+                    'text': textValue,
+                    'owner': {'id': user_id, 'username': user_id},
+                    'parent_post': {'id': post_id}
+                })
                 console.log(data)
-                if (textValue.trim() !== ''){
-                    fetch("{% url 'add post comment' %}", {method:'POST',
-                        headers:{'Content-Type': 'application/json', 'X-CSRFToken': csrf_token},
-                        body:data})
-                    .then(response => response.json())
+
+                if (textValue.trim() !== '') {
+                    fetch("{% url 'add post comment' %}", {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf_token},
+                        body: data
+                    })
+                        .then(response => response.json())
                     document.getElementById(`${post_id}`).value = ''
-                    location.reload()
-                    document.querySelector(`button[data-id=${CSS.escape(post_id)}]`).click()
+                    {#location.reload()#}
+
+                    function delay(time) {
+                        return new Promise(resolve => setTimeout(resolve, time));
+                    }
+
+                    delay(400).then(() => document.querySelector(`button[data-id=${CSS.escape(post_id)}]`).click());
+
 
                 }
             }
