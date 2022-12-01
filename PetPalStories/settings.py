@@ -1,4 +1,5 @@
 import os
+import environ
 from django.contrib.messages import constants as messages
 
 from pathlib import Path
@@ -11,18 +12,17 @@ import cloudinary.api
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+env = environ.Env()
+environ.Env.read_env()
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
+DEBUG = False
 
-DEBUG = os.environ.get('DEBUG', True)
-
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '***REMOVED***').split(' ')
-
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(' ')
 
 # Application definition
 
@@ -45,9 +45,6 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'cloudinary',
     'rest_framework',
-
-
-
 
 ]
 
@@ -82,14 +79,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PetPalStories.wsgi.application'
 
-
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
- }
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -101,24 +97,26 @@ if DEBUG:
         }
     }
 
+else:
+    DATABASES = {
+
+    }
+
 cloudinary.config(
-  cloud_name=os.environ.get('cloud_name'),
-  api_key=os.environ.get('api_key'),
-  api_secret=os.environ.get('api_secret')
+    cloud_name=env('cloud_name'),
+    api_key=env('api_key'),
+    api_secret=env('api_secret')
 )
 
-
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-MAILJET_API_KEY = os.environ.get('MAILJET_API_KEY')
-MAILJET_API_SECRET = os.environ.get('MAILJET_API_SECRET')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
-EMAIL_TIMEOUT = os.environ.get('EMAIL_TIMEOUT')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
-
-
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+MAILJET_API_KEY = env('MAILJET_API_KEY')
+MAILJET_API_SECRET = env('MAILJET_API_SECRET')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_USE_SSL = env('EMAIL_USE_SSL')
+EMAIL_TIMEOUT = env('EMAIL_TIMEOUT')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -138,7 +136,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -149,7 +146,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -164,7 +160,6 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -173,3 +168,36 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.AppUser'
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'MYAPP': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}

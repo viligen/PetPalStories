@@ -1,5 +1,7 @@
 import datetime
 
+import pytz
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -7,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import mixins as auth_mixins, get_user_model
 from django.urls import reverse_lazy
 from django.views import generic
+
 
 from PetPalStories.common.forms import MessageStoryForm, SignedPetitionForm
 from PetPalStories.common.models import MessageStory, FavouriteStory, SignedPetition
@@ -72,7 +75,7 @@ def mark_as_read(request, pk_message, pk):
 
     message = MessageStory.objects.filter(pk=pk_message).get()
     message.is_read = True
-    message.seen_on = datetime.datetime.now()
+    message.seen_on = datetime.datetime.now(pytz.utc)
     message.save()
     return redirect('messages user', pk=pk)
 

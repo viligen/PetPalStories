@@ -64,13 +64,13 @@
             const commentItems = comments.map(comment => `
             <div class="row border  rounded bg-light p-2 mb-1">
                 <div class="col-sm-6"><strong class="border border-info rounded-circle bg-info bg-opacity-50 p-1">${comment.owner.username}</strong> : ${comment.text}</div>
-                <div class="col-sm-6 ps-5 text-muted text-end">commented on: ${new Date(comment.published_on)}</div>
+                <div class="col-sm-6 ps-5 text-muted text-end">commented on: ${new Date(comment.published_on).toUTCString()}</div>
             </div>`);
 
             return `<div class="mt-2 ps-4">${commentItems.join(' ')}</div>`
         };
 
-        function getComments(ev) {
+        function getPostComments(ev) {
             if (ev.target.tagName === 'BUTTON' && ev.target.textContent === 'See Comments') {
                 let post_pk = ev.target.dataset.id
 
@@ -121,7 +121,7 @@
         }
 
         window.onload = () => {
-            document.querySelector('div[data-id="comments"]').addEventListener("click", getComments)
+            document.querySelector('div[data-id="comments"]').addEventListener("click", getPostComments)
         }
 
 

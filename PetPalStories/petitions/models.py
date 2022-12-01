@@ -67,7 +67,7 @@ class Petition(models.Model):
 
     owner = models.ForeignKey(
         to=UserModel,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
 
         null=True,
         blank=True,

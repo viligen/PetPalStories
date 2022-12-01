@@ -31,14 +31,14 @@ class MessageStory(models.Model):
 
     story = models.ForeignKey(
         to=Story,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
 
     )
     sender = models.ForeignKey(
         to=UserModel,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
         related_name='sender'
