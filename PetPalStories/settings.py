@@ -188,7 +188,7 @@ LOGGING = {
             'datefmt': "%d/%b/%Y %H:%M:%S"
         },
         'simple': {
-            'format': '%(levelname)s %(message)s'
+            'format': '[%(asctime)s] %(levelname)s %(message)s'
         },
     },
     'handlers': {
@@ -198,7 +198,18 @@ LOGGING = {
             'filename': 'mysite.log',
             'formatter': 'verbose'
         },
+        'console': {
+            'level': 'INFO',
+            'filters': [],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
     },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+
     'loggers': {
         'django': {
             'handlers': ['file'],

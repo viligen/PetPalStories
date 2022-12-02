@@ -1,4 +1,3 @@
-
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
@@ -23,7 +22,7 @@ function getPostComments(ev) {
 
             .then(comments => {
 
-                console.log(comments)
+
                 let dataId = "comments-per-post" + post_pk
 
                 document.querySelector(`div[data-name=${CSS.escape(dataId)}]`).innerHTML =
