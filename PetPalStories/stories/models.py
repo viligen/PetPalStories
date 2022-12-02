@@ -35,7 +35,9 @@ class Story(models.Model):
         ),
         verbose_name="Pet's story"
     )
-    image = CloudinaryField('image', null=True, blank=True,)
+    image = CloudinaryField('image',
+                            null=True,
+                            blank=True,)
 
     pet_species = models.CharField(
         max_length=max(len(c) for c in SPECIES),

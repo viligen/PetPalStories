@@ -1,3 +1,4 @@
+from cloudinary.forms import CloudinaryFileField
 from django import forms
 
 from PetPalStories.petitions.models import Petition
@@ -10,10 +11,24 @@ class PetitionBaseForm(forms.ModelForm):
 
 
 class PetitionCreateForm(PetitionBaseForm):
-    ...
+    image = CloudinaryFileField(
+        # attrs={'style': "margin-top: 30px"},
+        options={
+            'tags': "directly_uploaded",
+            'crop': 'limit', 'width': 500, 'height': 500,
+            'eager': [{'crop': 'fill', 'width': 150, 'height': 100}]
+        })
 
 
 class PetitionEditForm(PetitionBaseForm):
+    image = CloudinaryFileField(
+        # attrs={'style': "margin-top: 30px"},
+        options={
+            'tags': "directly_uploaded",
+            'crop': 'limit', 'width': 500, 'height': 500,
+            'eager': [{'crop': 'fill', 'width': 150, 'height': 100}]
+        })
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

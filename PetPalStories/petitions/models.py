@@ -47,7 +47,9 @@ class Petition(models.Model):
         )
     )
 
-    image = CloudinaryField('image', null=True, blank=True,)
+    image = CloudinaryField('image',
+                            null=True,
+                            blank=True,)
 
     published_on = models.DateTimeField(
         auto_now_add=True,

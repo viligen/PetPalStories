@@ -20,7 +20,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(' ')
 
@@ -89,6 +89,8 @@ MESSAGE_TAGS = {
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+
 if DEBUG:
     DATABASES = {
         'default': {
@@ -99,8 +101,16 @@ if DEBUG:
 
 else:
     DATABASES = {
-
+        'default': {
+            'ENGINE': env('ENGINE_PG'),
+            'NAME': env('NAME_PG'),
+            'USER': env('USER_PG'),
+            'PASSWORD': env('PASSWORD_PG'),
+            'HOST': env('HOST_PG'),
+            'PORT': env('PORT_PG'),
+        }
     }
+
 
 cloudinary.config(
     cloud_name=env('cloud_name'),

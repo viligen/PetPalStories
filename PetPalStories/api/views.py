@@ -15,9 +15,6 @@ class CommentsListApiView(rest_views.ListAPIView):
         self.get_queryset()
         return super().get(*args, **kwargs)
 
-    # def post(self, *args, **kwargs):
-    #     return super().post(*args, **kwargs)
-
     def get_queryset(self):
         parent_post_id = self.request.query_params.get('query')
         queryset = self.queryset
