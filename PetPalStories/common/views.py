@@ -113,7 +113,7 @@ class MyFavouriteStories(OwnershipRequiredMixin, generic.ListView):
         stories_fav = FavouriteStory.objects.filter(user_id=self.request.user.pk).order_by('-pk')
         context['stories_filtered'] = [Story.objects.filter(pk=s.story_id).get() for s in stories_fav]
 
-        context['last_seen'] = get_last_seen_unique(self.request.session.get('last_seen', []))
+        context['last_seen'] = get_last_seen_unique(self.request.session.get('last_seen', []), model=Story)
         return context
 
 
