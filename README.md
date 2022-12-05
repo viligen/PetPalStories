@@ -13,18 +13,20 @@ IDEA: Creating an operational Web Application, which allows users to register, l
 
 CONTENT: PetPalStories project consists of several apps, static files folder, templates, tests and others. 
 Post comments have been developed, using Django Rest Framework and JS to prevent page reloading and gain better UX performance.
-
-DB & MEDIA: The project uses PostgreSQL as a DBMS. Media files are hosted on Cloudinary
-
-HOSTING: AWS
+The Admin part of the app allows access to authorized users with given permissions, depending on their roles - Superusers, Staff, Story Admins, Petition Admins, Forum Admins
 
 EMAILS: The app sends automatically emails via MailJet upon given events like user registration, new comment to a post, petition's goal reach.
 
 SECURITY: The project uses environment variables to hide sensitive information. Custom, extra security features are implemented to prevent unauthorized access to other users' data, others publications editing and deleting.
 
+DB & MEDIA: The project uses PostgreSQL as a DBMS. Media files are hosted on Cloudinary
+
 BACKEND: Django Framework, Django REST Framework
 
 FRONTEND: The project uses Django Templates, HTML5, CSS3, Bootstrap5, Popper, JS
+
+HOSTING: AWS
+
 
 MAIN THIRD PARTIES:
 
