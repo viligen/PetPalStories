@@ -7,7 +7,7 @@ Python Web Framework @ SoftUni
 
 Documentation:
 
-INITIATION: This application was created as a final project to 'Python Web Framework' course at SoftUni. It has been developed in the sake of pets.
+INITIATION: This application was created as a final project to 'Python Web Framework' course at SoftUni. It has been developed for the sake of pets.
 
 IDEA: Creating an operational Web Application, which allows users to register, login, create, edit and delete profiles, content, interact with each other in various ways, etc. The application's name is 'PetPalStories', where the main focus is on pets - publishing Stories with pictures, creating and signing Petitions, posting and commenting in Forum, sending messages to story authors, etc.
 
