@@ -1,7 +1,7 @@
 # PetPalStories
 Live at: www.petpalstories.de
 
-My Django Project - Nov - Dec 2022
+My Django Project Nov - Dec 2022
 
 Python Web Framework @ SoftUni
 
