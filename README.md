@@ -22,7 +22,9 @@ EMAILS: The app sends automatically emails via MailJet upon given events like us
 
 SECURITY: The project uses environment variables to hide sensitive information. Custom, extra security features are implemented to prevent unauthorized access to other users' data, others publications editing and deleting.
 
-FRONTEND: The project uses HTML5, CSS3, Bootstrap5, Popper, JS
+BACKEND: Django Framework, Django REST Framework
+
+FRONTEND: The project uses Django Templates, HTML5, CSS3, Bootstrap5, Popper, JS
 
 MAIN THIRD PARTIES:
 
