@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse_lazy
 
 from PetPalStories.common.models import FavouriteStory
+from PetPalStories.forum.models import Post
 from PetPalStories.petitions.models import Petition
 from PetPalStories.stories.models import Story
 
@@ -127,3 +128,22 @@ class ProfileDetailsViewTests(TestCase):
         response = self.client.get(reverse_lazy('details user', kwargs={'pk': user.pk}))
 
         self.assertEqual(len(fs_list), response.context['favourite_stories_count'])
+
+    def test_profile__when_no_own_posts__assert_empty(self):
+        user = self._creat_user_and_login(self.VALID_PROFILE_DATA)
+
+        response = self.client.get(reverse_lazy('details user', kwargs={'pk': user.pk}))
+
+        self._assert_empty_collection(response.context['own_posts_count'])
+
+    def test_profile__when_own_posts__assert_count(self):
+
+        user = self._creat_user_and_login(self.VALID_PROFILE_DATA)
+
+        Post.objects.create(owner=user, topic='test topic')
+
+        expected_count = 1
+
+        response = self.client.get(reverse_lazy('details user', kwargs={'pk': user.pk}))
+
+        self.assertEqual(expected_count, response.context['own_posts_count'])
