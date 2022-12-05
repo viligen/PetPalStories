@@ -7,7 +7,6 @@ MAX_IMAGE_SIZE_B = MAX_IMAGE_SIZE_MB * 1024 * 1024
 ERROR_MESSAGE_IMAGE_SIZE = f"Your picture's size should not exceed {MAX_IMAGE_SIZE_MB}MB"
 
 ERROR_MESSAGE_NOT_CHARS = 'You need to use alphabetic characters only'
-# ERROR_MESSAGE_NOT_OWNER = 'You are not authorized to see this page'
 
 
 def validate_image_size(file_obj):
