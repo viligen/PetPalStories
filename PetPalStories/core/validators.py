@@ -21,9 +21,3 @@ def validate_image_size(file_obj):
 def validate_only_letters(value):
     if value and not all([ch.isalpha() for ch in value]):
         raise ValidationError(message=ERROR_MESSAGE_NOT_CHARS)
-
-
-# def validate_owner(request, obj):
-#     if obj.owner != request.user:
-#         messages.error(request, ERROR_MESSAGE_NOT_OWNER)
-#         return redirect('index')
