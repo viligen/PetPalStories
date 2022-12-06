@@ -17,7 +17,9 @@ class PetitionCreateForm(PetitionBaseForm):
             'tags': "directly_uploaded",
             'crop': 'limit', 'width': 500, 'height': 500,
             'eager': [{'crop': 'fill', 'width': 150, 'height': 100}]
-        })
+        },
+        required=False,
+    )
 
 
 class PetitionEditForm(PetitionBaseForm):
@@ -27,7 +29,8 @@ class PetitionEditForm(PetitionBaseForm):
             'tags': "directly_uploaded",
             'crop': 'limit', 'width': 500, 'height': 500,
             'eager': [{'crop': 'fill', 'width': 150, 'height': 100}]
-        })
+        },
+        required=False,)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
