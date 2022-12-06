@@ -27,7 +27,11 @@
                     {% endif %}
                 </p>
             {% endif %}
-
+            {% if request.user.is_authenticated and petition.owner == request.user and not petition.is_active %}
+                <p class="card-text mb-2 text-start">
+                    <a href="{% url 'details petition' slug=petition.slug %}" class="btn btn-outline-info">Details</a>
+                </p>
+            {% endif %}
         </div>
     </div>
 </div>

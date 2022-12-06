@@ -33,12 +33,12 @@
                {% endif %}
                 <hr>
                 <div class="mt-5 mb-2">
-                {% if petition.owner_id == request.user.id %}
+                {% if petition.owner_id == request.user.id and petition.is_active %}
                     <a href="{% url 'edit petition' slug=petition.slug  %}" class="btn btn-outline-warning">Edit Petition</a>
                     <a href="{% url 'stop petition' slug=petition.slug  %}" class="btn btn-outline-danger">Stop Petition</a>
 
                 {% endif %}
-                {% if not is_signed %}
+                {% if not is_signed and petition.is_active %}
                     <a href="{% url 'sign petition' slug=petition.slug pk=request.user.pk %}" class="btn btn-outline-info">Sign Petition</a>
                 {% endif %}
                 </div>
