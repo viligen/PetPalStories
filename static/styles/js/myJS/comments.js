@@ -21,9 +21,11 @@ const getRequest = (post_pk) => fetch("/api/comments/?query=" + post_pk)
 
 
 const postRequest = (csrf_token, data) => fetch("/api/comments/add/", {
-    method: 'POST', headers: {
+    method: 'POST',
+    headers: {
         'Content-Type': 'application/json', 'X-CSRFToken': csrf_token
-    }, body: data,
+    },
+    body: data,
 })
     .then(response => response.status);
 
