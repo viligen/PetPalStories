@@ -132,6 +132,9 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+# if DEBUG:
+#     AUTH_PASSWORD_VALIDATORS = []
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
