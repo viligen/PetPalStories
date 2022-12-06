@@ -20,7 +20,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = True
+DEBUG = int(env('DEBUG'))
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(' ')
 
