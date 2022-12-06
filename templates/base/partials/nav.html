@@ -39,6 +39,12 @@
                            href="{% url 'details user' pk=request.user.pk %}">You are signed
                             in as {{ request.user.username }}</a>
                     </li>
+                    {% if request.user.is_superuser or request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link fs-4"
+                               href="{% url 'admin:index' %}">Administration</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link fs-4" href="{% url 'messages user' pk=request.user.pk %}">Messages<span
                                 class="badge bg-danger rounded-pill text-white fs-6 ps-1 pe-1">{% filter_new_msgs user=request.user %}</span></a>
