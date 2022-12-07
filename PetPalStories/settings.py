@@ -9,6 +9,8 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+import PetPalStories
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -93,25 +95,26 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+#
+# else:
 
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': env('ENGINE_PG'),
-            'NAME': env('NAME_PG'),
-            'USER': env('USER_PG'),
-            'PASSWORD': env('PASSWORD_PG'),
-            'HOST': env('HOST_PG'),
-            'PORT': env('PORT_PG'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': env('ENGINE_PG'),
+        'NAME': env('NAME_PG'),
+        'USER': env('USER_PG'),
+        'PASSWORD': env('PASSWORD_PG'),
+        'HOST': env('HOST_PG'),
+        'PORT': env('PORT_PG'),
     }
+}
 
 
 cloudinary.config(
@@ -170,6 +173,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = '/tmp/PetPalStories/static'
 
 MEDIA_URL = '/media/'
 
