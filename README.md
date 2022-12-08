@@ -1,11 +1,11 @@
 # PetPalStories
-Live at: www.petpalstories.de
+Live at: http://petpalstories.de/
 
 My Django Project Nov - Dec 2022
 
 Python Web Framework @ SoftUni
 
-Documentation:
+##Documentation:
 
 INITIATION: This application was created as a final project to 'Python Web Framework' course at SoftUni. It has been developed for the sake of pets.
 
@@ -34,6 +34,7 @@ MAIN THIRD PARTIES:
     'django_bootstrap5',
     'cloudinary',
     'rest_framework',
+    'mailjet',
 
 
 DISCLAIMER: This Application has no commercial purposes, it's not intended for commercial use and has features, which had not been fully tested.
