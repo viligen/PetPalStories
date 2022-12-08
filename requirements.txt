@@ -1,6 +1,6 @@
 asgiref==3.5.2
 beautifulsoup4==4.11.1
-certifi==2022.9.24
+
 charset-normalizer==2.1.1
 click==7.1.2
 cloudinary==1.30.0
