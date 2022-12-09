@@ -26,6 +26,8 @@ DEBUG = int(env('DEBUG'))
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(' ')
 
+CSRF_TRUSTED_ORIGINS = [f'https://{h}' for h in ALLOWED_HOSTS]
+
 # Application definition
 
 INSTALLED_APPS = [
