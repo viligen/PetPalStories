@@ -1,6 +1,6 @@
 from django import template
 
-from PetPalStories.common.models import MessageStory, FavouriteStory
+from PetPalStories.common.models import MessageStory
 
 register = template.Library()
 

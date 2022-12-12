@@ -48,9 +48,10 @@ class MessageStoryCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView)
         return reverse_lazy('messages user', kwargs={'pk': self.request.user.pk})
 
     def form_valid(self, form):
+        story = Story.objects.filter(slug=self.kwargs['slug']).get()
         form.instance.sender_id = self.request.user.pk
-        form.instance.story_id = Story.objects.filter(slug=self.kwargs['slug']).get().pk
-        form.instance.receiver_id = Story.objects.filter(slug=self.kwargs['slug']).get().owner_id
+        form.instance.story_id = story.pk
+        form.instance.receiver_id = story.owner_id
 
         return super().form_valid(form)
 
@@ -111,8 +112,7 @@ class MyFavouriteStories(OwnershipRequiredMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         stories_fav = FavouriteStory.objects.filter(user_id=self.request.user.pk).order_by('-pk')
-        context['stories_filtered'] = [Story.objects.filter(pk=s.story_id).get() for s in stories_fav]
-
+        context['stories_filtered'] = [fav.story for fav in stories_fav]
         context['last_seen'] = get_last_seen_unique(self.request.session.get('last_seen', []), model=Story)
         return context
 

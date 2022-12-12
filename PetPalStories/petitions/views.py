@@ -1,14 +1,11 @@
-import datetime
-from django.utils.timezone import utc
-
 from django.db.models import Q
-from django.shortcuts import render
+
 from django.contrib.auth import mixins as auth_mixins
 from django.urls import reverse_lazy
 from django.views import generic
 
 from PetPalStories.common.models import SignedPetition
-from PetPalStories.core.my_Mixins import OwnershipRequiredMixin, IsOwnerMixin
+from PetPalStories.core.my_Mixins import IsOwnerMixin
 from PetPalStories.petitions.forms import PetitionCreateForm, PetitionEditForm, PetitionStopForm
 from PetPalStories.petitions.models import Petition
 
