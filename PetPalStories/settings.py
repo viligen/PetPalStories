@@ -62,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'PetPalStories.core.custom_middlewares.CustomHeaderMiddleware',
+    'PetPalStories.core.custom_middlewares.CustomMessageMiddleware',
 ]
 
 ROOT_URLCONF = 'PetPalStories.urls'

@@ -10,8 +10,8 @@ ERROR_MESSAGE_NOT_CHARS = 'You need to use alphabetic characters only'
 
 
 def validate_image_size(file_obj):
-
-    filesize = file_obj.file.size
+    print(file_obj)
+    filesize = file_obj.metadata['bytes']
 
     if filesize > MAX_IMAGE_SIZE_B:
         raise ValidationError(message=ERROR_MESSAGE_IMAGE_SIZE)

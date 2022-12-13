@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block main_content %}
+
+    <div class="container-fluid p-5 bg-light shadow rounded text-center">
+        <img src="{% static 'images/default_animal_image.png' %}" alt="413 file too large gif">
+        <div class="not-found">
+        <h1>
+            Sorry, we could not proceed further with your file uploading as it exceeds the maximum size limit.
+        </h1>
+
+        <h3>Error 413 - File size too large.</h3>
+
+        <a href="{% url 'index' %}" class="btn btn-outline-info">Return to PetPalStories</a>
+    </div>
+    </div>
+
+
+
+
+{% endblock %}

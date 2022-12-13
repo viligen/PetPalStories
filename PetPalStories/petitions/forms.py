@@ -1,23 +1,29 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 
+from PetPalStories.core import validators
 from PetPalStories.petitions.models import Petition
 
 
 class PetitionBaseForm(forms.ModelForm):
     image = CloudinaryFileField(
         # attrs={'style': "margin-top: 30px"},
+        validators=(validators.validate_image_size,),
         options={
             'tags': "directly_uploaded",
             'crop': 'limit', 'width': 500, 'height': 500,
             'eager': [{'crop': 'fill', 'width': 150, 'height': 100}]
         },
         required=False,
+
+        help_text=f'Please, make sure your image size is up to {validators.MAX_IMAGE_SIZE_MB}MB'
     )
 
     class Meta:
         model = Petition
         exclude = ('published_on', 'slug', 'owner', 'is_active')
+
+
 
 
 class PetitionCreateForm(PetitionBaseForm):
