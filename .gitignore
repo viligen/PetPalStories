@@ -103,6 +103,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+../../.git.bfg-report
 .env
 .env.prod
 PetPalStories/.env
@@ -132,3 +133,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /PetPalStories/.env
+/.git.bfg-report/
+/.git.bfg-report/
+/.git.bfg-report/2022-12-14/
+/.git.bfg-report/2022-12-14/19-29-30/
+/.git.bfg-report/
+/.git.bfg-report/2022-12-14/19-29-30/
+/.git.bfg-report/
+/.git.bfg-report/2022-12-14/
