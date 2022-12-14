@@ -12,7 +12,7 @@ class CustomHeaderMiddleware(MiddlewareMixin):
 class CustomMessageMiddleware(MiddlewareMixin):
     def __call__(self, request):
         if not request.user.is_authenticated:
-            messages.warning(request, 'Please sign in or sign up to gain full access to all features')
+            messages.warning(request, 'Sign in or sign up to gain full access to all features')
 
         response = super().__call__(request)
         return response

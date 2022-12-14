@@ -47,7 +47,7 @@ class MessageStory(models.Model):
     )
     receiver = models.ForeignKey(
         to=UserModel,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
         related_name='receiver'
@@ -94,14 +94,14 @@ class FavouriteStory(models.Model):
 class SignedPetition(models.Model):
     petition = models.ForeignKey(
         to=Petition,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
 
     )
     user = models.ForeignKey(
         to=UserModel,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
 
