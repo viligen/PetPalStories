@@ -142,3 +142,4 @@ dmypy.json
 /.git.bfg-report/
 /.git.bfg-report/2022-12-14/
 *.jar
+./*jar
