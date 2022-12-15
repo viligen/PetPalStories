@@ -13,30 +13,16 @@
             </div>
         {% endif %}
     </div>
-    <div class = "container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
-          <form class="d-flex" role="search" method="GET" action="{% url 'petitions' %}">
-            <input class="form-control me-2" type="search" placeholder="Search by title or target location (e.g. 'national')..." aria-label="Search" name="query" value="{{ request.GET.query }}">
+    <div class="container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
+        <form class="d-flex" role="search" method="GET" action="{% url 'petitions' %}">
+            <input class="form-control me-2" type="search"
+                   placeholder="Search by title or target location (e.g. 'national')..." aria-label="Search"
+                   name="query" value="{{ request.GET.query|default:'' }}">
             <button class="btn btn-info" type="submit">Search</button>
-          </form>
+        </form>
     </div>
 
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a class="btn btn-info" href="?page=1">&laquo; first</a>
-            <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">prev</a>
-        {% endif %}
-
-        <span class="current text-muted h6">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-        </span>
-
-        {% if page_obj.has_next %}
-            <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
-            <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-    </div>
+    {% include 'base/partials/pagination.html' %}
 
     <div class="container-fluid mt-3 mb-3 p-5  shadow rounded">
 

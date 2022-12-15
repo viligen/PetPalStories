@@ -16,28 +16,12 @@
     <div class="container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
         <form class="d-flex" role="search" method="GET" action="{% url 'forum dashboard' %}">
             <input class="form-control me-2 " type="search" placeholder="Search by topic or author's username..."
-                   aria-label="Search" name="query" value="{{ request.GET.query }}">
+                   aria-label="Search" name="query" value="{{ request.GET.query|default:'' }}">
             <button class="btn btn-info" type="submit">Search</button>
         </form>
     </div>
 
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a class="btn btn-info" href="?page=1">&laquo; first</a>
-            <a class="btn btn-info" href="?page={{ page_obj.previous_page_number }}">prev</a>
-        {% endif %}
-
-        <span class="current text-muted h6">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-        </span>
-
-        {% if page_obj.has_next %}
-            <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
-            <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-    </div>
+    {% include 'base/partials/pagination.html' %}
 
     <div data-id="comments" class="container-fluid mt-3 mb-3 p-5  shadow rounded">
 
@@ -54,81 +38,6 @@
 
 {% block my_scripts %}
     <script src="{% static 'styles/js/myJS/comments.js' %}">
-
-        {#function delay(time) {#}
-        {#    return new Promise(resolve => setTimeout(resolve, time));#}
-        {##}
-        {##}
-        {#const renderCommentsList = (comments) => {#}
-        {##}
-        {#    const commentItems = comments.map(comment => `#}
-        {#    <div class="row border  rounded bg-light p-2 mb-1">#}
-        {#        <div class="col-sm-6"><strong class="border border-info rounded-circle bg-info bg-opacity-50 p-1">${comment.owner.username}</strong> : ${comment.text}</div>#}
-        {#        <div class="col-sm-6 ps-5 text-muted text-end">commented on: ${new Date(comment.published_on).toUTCString()}</div>#}
-        {#    </div>`);#}
-        {##}
-        {#    return `<div class="mt-2 ps-4">${commentItems.join(' ')}</div>`#}
-        {##}
-        {##}
-        {#function getPostComments(ev) {#}
-        {#    if (ev.target.tagName === 'BUTTON' && ev.target.textContent === 'See Comments') {#}
-        {#        let post_pk = ev.target.dataset.id#}
-        {##}
-        {#        fetch("{% url 'post comments' %}" + `?query=${post_pk}`)#}
-        {#            .then(response => response.json())#}
-        {#            .then(comments => {#}
-        {#                let dataId = "comments-per-post" + `${post_pk}`#}
-        {##}
-        {#                document.querySelector(`div[data-name=${CSS.escape(dataId)}]`).innerHTML =#}
-        {#                    renderCommentsList(comments);#}
-        {##}
-        {#            });#}
-        {##}
-        {##}
-        {#    } else if (ev.target.tagName === 'BUTTON' && ev.target.type === 'submit') {#}
-        {#        ev.preventDefault()#}
-        {##}
-        {#        const post_id = ev.target.dataset.post#}
-        {#        const user_id = ev.target.dataset.user#}
-        {##}
-        {#        const csrf_token = document.cookie#}
-        {#            .split('; ')#}
-        {#            .find(row => row.startsWith('csrftoken'))#}
-        {#            .split('=')[1];#}
-        {##}
-        {##}
-        {#        const textElement = document.getElementById(`${post_id}`)#}
-        {#        const textValue = textElement.value#}
-        {##}
-        {#        const data = JSON.stringify({#}
-        {#            'text': textValue,#}
-        {#            'owner': {'id': user_id, 'username': 'username'},#}
-        {#            'parent_post': {'id': post_id},}#}
-        {#        )#}
-        {##}
-        {##}
-        {##}
-        {#        if (textValue.trim() !== '') {#}
-        {#            fetch("{% url 'add post comment' %}", {#}
-        {#                method: 'POST',#}
-        {#                headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf_token},#}
-        {#                body: data#}
-        {#            })#}
-        {#                .then(response => response.json())#}
-        {#            textElement.value = ''#}
-        {##}
-        {#            delay(300).then(() => document.querySelector(`button[data-id=${CSS.escape(post_id)}]`).click());#}
-        {##}
-        {##}
-        {#        }#}
-        {#    }#}
-        {##}
-        {##}
-        {##}
-        {#window.onload = () => {#}
-        {#    document.querySelector('div[data-id="comments"]').addEventListener("click", getPostComments)#}
-        {##}
-
     </script>
 
 {% endblock %}
