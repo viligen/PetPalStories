@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from PetPalStories.forum.models import Post, Comment
+import bleach
+
 
 UserModel = get_user_model()
 
@@ -29,6 +31,6 @@ class CommentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('parent_post')
         validated_data.pop('owner')
-        return Comment.objects.create(text=validated_data['text'],
+        return Comment.objects.create(text=bleach.clean(validated_data['text']),
                                       parent_post=Post.objects.get(id=self._kwargs['data']['parent_post']['id']),
                                       owner=UserModel.objects.get(id=self._kwargs['data']['owner']['id']))
