@@ -1,0 +1,5 @@
+{% if 'query' in  request.GET %}
+    value="{{ request.GET.query }}"
+{% else %}
+    value=""
+{% endif %}

@@ -16,7 +16,7 @@
     <div class="container-fluid w-50 mx-start text-left  mt-3 mb-5 p-0">
         <form class="d-flex" role="search" method="GET" action="{% url 'forum dashboard' %}">
             <input class="form-control me-2 " type="search" placeholder="Search by topic or author's username..."
-                   aria-label="Search" name="query" value="{{ request.GET.query|default:'' }}">
+                   aria-label="Search" name="query" {% include 'base/partials/query.html' %}>
             <button class="btn btn-info" type="submit">Search</button>
         </form>
     </div>
