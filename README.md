@@ -28,10 +28,10 @@ Custom, extra security features are implemented to prevent unauthorized access t
 ### DB & MEDIA: 
 The project uses PostgreSQL as a DBMS. Image files are hosted on Cloudinary
 
-### BACKEND: 
+### BACK-END: 
 Django Framework, Django REST Framework
 
-### FRONTEND: 
+### FRONT-END: 
 The project uses Django Templates, HTML5, CSS3, Bootstrap5, Popper, JS. 
 Responsive design, thanks to Bootstrap5 and CSS3.
 
